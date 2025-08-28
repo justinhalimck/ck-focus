@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.jsx";
 import Home from "./pages/Home.jsx";
 import Work from "./pages/Work.jsx";
+import End from "./pages/End.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<App />} />
         <Route path="/work" element={<Work />} />
+        <Route path="/end" element={<End />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

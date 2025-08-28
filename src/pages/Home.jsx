@@ -15,15 +15,31 @@ const Home = () => {
       >
         <div
           style={{
-            marginTop: "20vh",
+            marginTop: "15vh",
             padding: "1em",
             color: "white",
             fontSize: "24px",
           }}
         >
           <Logo />
-          <h1>ポモドーロ</h1>
-          <h2>Tadasi</h2>
+          <div
+            style={{
+              color: "white",
+              fontSize: "40px",
+              fontWeight: 700,
+              lineHeight: "normal",
+            }}>
+            ポモドーロ
+          </div>
+          <div
+            style={{
+              color: "white",
+              fontSize: "30px",
+              fontWeight: 700,
+              lineHeight: "normal",
+            }}>
+            Tadasi
+            </div>
         </div>
         <Button
           onClick={() => navigate("/work")}

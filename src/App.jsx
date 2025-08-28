@@ -71,7 +71,6 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <h1>CK FOCUS</h1>
       <Timer />
       <div className="card">
         <button type="button" onClick={() => setCount((count) => count + 1)}>

@@ -21,12 +21,20 @@ export default defineConfig({
           },
         ],
       },
-      registerType: "autoUpdate",
-      devOptions: {
-        enabled: true,
-      },
-      injectRegister: "auto",
-    }),
-  ],
-  server: { allowedHosts: true },
-});
+    registerType: 'autoUpdate', 
+    devOptions: {
+      enabled: true,
+    },
+    injectRegister: 'auto',
+    srcDir: 'src',
+    filename: 'sw/sw.js',
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+      importScripts: ['sw.js']
+    }
+  }
+)],
+  server: {
+    allowedHosts: true
+  }
+})

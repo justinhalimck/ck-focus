@@ -9,19 +9,19 @@ function App() {
   useEffect(() => {
     if (count === 0) return;
     if (count === 1) {
+      navigator.serviceWorker.getRegistration().then((r) => r.update())
       Notification.requestPermission().then((res) => {
-        console.log(res);
-        setInterval(() => {
-          console.log("CREATED NOTIF");
-          new Notification("MY NOTIFICATION", { body: "NOTIF BODY" });
-        }, [10000]);
-      });
+        console.log(res)
+      })
       return;
     }
+    (() => {
+      navigator.serviceWorker.controller.postMessage("push")
+    })()
     setTimeout(() => {
-      new Notification("MY NOTIFICATION", { body: "NOTIF BODY" });
-    }, [3000]);
-  }, [count]);
+      new Notification("Notif from main", { body: "NOTIF BODY" })
+    }, [3000])
+  }, [count])
 
   return (
     <>

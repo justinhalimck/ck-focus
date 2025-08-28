@@ -3,6 +3,9 @@ import CountdownTimer from "../components/CountdownTimer";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
 
+const WORK_DURATION = 7;
+const REST_DURATION = 5;
+
 const Work = () => {
   const [mode, setMode] = useState("rest");
   const [code, setCode] = useState(null);
@@ -24,13 +27,17 @@ const Work = () => {
           <div style={{ height: "90vh" }}>
             <SubjectInfo code={code} name={subjectName} />
           </div>
-          <CountdownTimer duration={5} onComplete={() => setMode("rest")} />
+          <CountdownTimer
+            duration={WORK_DURATION}
+            onComplete={() => setMode("rest")}
+          />
         </>
       )}
       {mode === "rest" && (
         <>
           <div style={{ height: "90vh" }}>
             <SelectSubject
+              currentCode={code}
               onSelect={(code, name) => {
                 setCode(code);
                 setSubjectName(name);
@@ -38,7 +45,10 @@ const Work = () => {
             />
           </div>
           {code ? (
-            <CountdownTimer duration={3} onComplete={() => setMode("work")} />
+            <CountdownTimer
+              duration={REST_DURATION}
+              onComplete={() => setMode("work")}
+            />
           ) : (
             <CountdownTimer duration={0} onComplete={() => { }} />
           )}

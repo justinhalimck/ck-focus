@@ -7,7 +7,7 @@ const SUBJECTS = {
   "00003": "Example Project 3",
 };
 
-const SelectSubject = ({ onSelect }) => {
+const SelectSubject = ({ currentCode, onSelect }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Autocomplete
@@ -16,7 +16,11 @@ const SelectSubject = ({ onSelect }) => {
           label: v,
           code: k,
         }))}
-        sx={{ margin: "2em", marginTop: "10vh", textAlign: "left" }}
+        sx={{
+          margin: "2em",
+          marginTop: "10vh",
+          textAlign: "left",
+        }}
         renderInput={(params) => (
           <TextField {...params} label="Select subject" />
         )}
@@ -24,8 +28,9 @@ const SelectSubject = ({ onSelect }) => {
       />
 
       <h1 style={{ margin: "1em", marginTop: "20vh" }}>
-        Please select your subject.
+        {currentCode ? "Take a short break." : "Please select your subject."}
       </h1>
+      <div style={{ fontSize: "14px" }}>{SUBJECTS[currentCode]}</div>
     </div>
   );
 };

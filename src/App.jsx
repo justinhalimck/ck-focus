@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import Timer from "./components/Timer";
-import "./App.css";
-import { CssBaseline } from "@mui/material";
 import db from "./utils/indexeddb";
+import { SWClient } from "./lib/sw";
+import { postAlarm, subscribeUser } from "./lib/api";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,7 +24,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (count === 0) return;
+    if (count === 0) {
+      subscribeUser();
+      SWClient.update();
+      return;
+    }
+
+    postAlarm(
+      `my alarm ${count}`,
+      `alarm body ${count}`,
+      new Date().getTime() + 5000,
+    );
 
     // Store focus session data in IndexedDB
     const storeFocusSession = async () => {
@@ -52,27 +61,10 @@ function App() {
     };
 
     storeFocusSession();
-
-    if (count === 1) {
-      navigator.serviceWorker.getRegistration().then((r) => r?.update());
-      Notification.requestPermission().then((res) => {
-        console.log(res);
-      });
-      return;
-    }
-    (() => {
-      navigator.serviceWorker.controller?.postMessage("push");
-    })();
-    setTimeout(() => {
-      new Notification("Notif from main", { body: "NOTIF BODY" });
-    }, [3000]);
   }, [count]);
 
   return (
     <>
-      <CssBaseline />
-      <h1>CK FOCUS</h1>
-      <Timer />
       <div className="card">
         <button type="button" onClick={() => setCount((count) => count + 1)}>
           count is {count}

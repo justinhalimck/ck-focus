@@ -7,15 +7,15 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      includeAssets: ["vite.svg"],
+      includeAssets: ["pomodoro.svg"],
       manifest: {
         name: "Colorkrew FOCUS",
-        short_name: "ck-focus",
+        short_name: "Pomodoro",
         description: "Next Gen Tadasi",
         theme_color: "#ffffff",
         icons: [
           {
-            src: "vite.svg",
+            src: "pomodoro.svg",
             sizes: "256x256",
             type: "image/png",
           },

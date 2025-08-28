@@ -1,15 +1,7 @@
-/**
- * Copyright 2018 Google Inc. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *     http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+const Messages = {
+  PingRequest: 1000,
+  PingResponse: 1001,
+}
 
 // Simple IndexedDB utility for Service Worker
 const DB_NAME = 'CKFocusDB';
@@ -140,8 +132,6 @@ self.addEventListener("push", async (ev) => {
   } catch (error) {
     console.error('SW: Failed to store push event:', error);
   }
-  
-  self.registration.showNotification("PUSH NOTIF FROM SW", { body: "HEHE" });
 });
 
 self.addEventListener("message", async (ev) => {
@@ -164,12 +154,35 @@ self.addEventListener("message", async (ev) => {
   } catch (error) {
     console.error('SW: Failed to store message event:', error);
   }
-
-  setTimeout(() => {
-    self.registration.showNotification("MESSAGE NOTIF FROM SW 2", {
-      body: "HEHE2",
-    });
-  }, 3000);
 });
 
 console.log("SW: Service Worker script loaded completely");
+function displayNotification(
+  title,
+  body
+) {
+  self.registration.showNotification(title, {body: body})
+}
+
+self.addEventListener("push", (ev) => {
+  const data = ev.data.json();
+  displayNotification(data.title, data.body);
+});
+
+self.addEventListener("message", (ev) => {
+  const message = ev.data;
+  const messageID = message.messageID;
+  const payload = message.body
+
+  handleMessage(messageID, payload)
+});
+
+function handleMessage(messageID, payload) {
+  switch (messageID) {
+    case Messages.PingRequest:
+      displayNotification("PING", "PONG")
+      break;
+    default:
+      console.log('unhandled message', messageID, payload)
+  }
+}

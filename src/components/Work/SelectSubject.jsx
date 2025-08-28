@@ -16,14 +16,16 @@ const SelectSubject = ({ onSelect }) => {
           label: v,
           code: k,
         }))}
-        sx={{ margin: "2em", marginTop: "5vh", textAlign: "left" }}
+        sx={{ margin: "2em", marginTop: "10vh", textAlign: "left" }}
         renderInput={(params) => (
           <TextField {...params} label="Select subject" />
         )}
         onChange={(_e, { code }) => onSelect(code, SUBJECTS[code])}
       />
 
-      <h1 style={{ marginTop: "20vh" }}>Please select your subject.</h1>
+      <h1 style={{ margin: "1em", marginTop: "20vh" }}>
+        Please select your subject.
+      </h1>
     </div>
   );
 };

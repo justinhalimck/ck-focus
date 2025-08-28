@@ -16,7 +16,7 @@ const Work = () => {
         background:
           mode === "work"
             ? "linear-gradient(0deg, #D5E9EA 0%, #0074D9 100%)"
-            : "linear-gradient(0deg, #DDEFFF 2.4%, #F8F8F8 100%)",
+            : "linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)",
       }}
     >
       {mode === "work" && (

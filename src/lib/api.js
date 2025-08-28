@@ -35,6 +35,7 @@ export async function subscribeUser() {
   }, {headers: { 'Content-Type': 'application/json', 'x-focus-user': 'incin' }}).then(() => console.log('subscribed')).catch((err) => console.error(err))
 }
 
+// queue a notification to be sent at a later time
 export async function postAlarm(title, body, alertAt) {
     axios.post('https://pomodoro-api.incin.net/api/alarm', {
         notifyAt: alertAt,

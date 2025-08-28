@@ -27,6 +27,7 @@ const CountdownTimer = ({ duration, onComplete }) => {
         alignItems: "center",
         height: "10vh",
         background: "#FFE3E3",
+        color: "#FF5656",
         fontSize: "32px",
         fontWeight: 600,
       }}

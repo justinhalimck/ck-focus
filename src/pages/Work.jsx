@@ -2,11 +2,15 @@ import { useState } from "react";
 import CountdownTimer from "../components/CountdownTimer";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
 
 const WORK_DURATION = 7;
 const REST_DURATION = 5;
 
 const Work = () => {
+  const navigate = useNavigate();
+
   const [mode, setMode] = useState("rest");
   const [code, setCode] = useState(null);
   const [subjectName, setSubjectName] = useState(null);
@@ -43,6 +47,20 @@ const Work = () => {
                 setSubjectName(name);
               }}
             />
+            <Button
+              onClick={() => navigate("/end")}
+              sx={{
+                marginTop: "15vh",
+                borderRadius: "40px",
+                background: "#28272C",
+                textTransform: "none",
+                fontSize: "14px",
+                paddingX: "10vw",
+                color: "white",
+              }}
+            >
+              Stop working
+            </Button>
           </div>
           {code ? (
             <CountdownTimer

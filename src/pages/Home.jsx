@@ -22,7 +22,8 @@ const Home = () => {
           }}
         >
           <Logo />
-          <h1>Colorkrew Focus</h1>
+          <h1>ポモドーロ</h1>
+          <h2>Tadasi</h2>
         </div>
         <Button
           onClick={() => navigate("/dashboard")}

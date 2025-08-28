@@ -1,6 +1,6 @@
 const SubjectInfo = ({ code, name }) => {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <h1 style={{ marginTop: "20vh", color: "white" }}>You are working on</h1>
       <div
         style={{
@@ -24,7 +24,7 @@ const SubjectInfo = ({ code, name }) => {
         ></div>
         <div style={{ fontSize: "14px" }}>{name}</div>
       </div>
-    </>
+    </div>
   );
 };
 

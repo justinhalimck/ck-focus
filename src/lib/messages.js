@@ -1,4 +1,4 @@
 export const Messages = {
-    PingRequest: 1000,
-    PingResponse: 1001,
-}
+  PingRequest: 1000,
+  PingResponse: 1001,
+};

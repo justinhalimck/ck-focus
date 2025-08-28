@@ -13,8 +13,14 @@ const End = () => {
           background: "linear-gradient(0deg, #DDEFFF 0%, #F8F8F8 100%)",
         }}
       >
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-          <img src={Logo} alt="Logo" style={{ width: "100vw"}} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <img src={Logo} alt="Logo" style={{ width: "100vw" }} />
           <div
             style={{
               paddingTop: "7vh",
@@ -24,8 +30,9 @@ const End = () => {
               fontSize: "24px",
               fontWeight: 600,
               lineHeight: "normal",
-            }}>
-            You have finish todays work!
+            }}
+          >
+            You have finished today's work!
           </div>
         </div>
         <Button
@@ -47,7 +54,8 @@ const End = () => {
             textAlign: "center",
             fontSize: "14px",
             fontWeight: 400,
-            lineHeight: "20px"
+            lineHeight: "20px",
+            textTransform: "none",
           }}
         >
           Restart work

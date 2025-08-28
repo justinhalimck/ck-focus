@@ -28,7 +28,8 @@ const Home = () => {
               fontSize: "40px",
               fontWeight: 700,
               lineHeight: "normal",
-            }}>
+            }}
+          >
             ポモドーロ
           </div>
           <div
@@ -37,9 +38,10 @@ const Home = () => {
               fontSize: "30px",
               fontWeight: 700,
               lineHeight: "normal",
-            }}>
+            }}
+          >
             Tadasi
-            </div>
+          </div>
         </div>
         <Button
           onClick={() => navigate("/work")}

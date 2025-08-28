@@ -68,7 +68,7 @@ const Work = () => {
               onComplete={() => setMode("work")}
             />
           ) : (
-            <CountdownTimer duration={0} onComplete={() => { }} />
+            <CountdownTimer duration={0} onComplete={() => {}} />
           )}
         </>
       )}

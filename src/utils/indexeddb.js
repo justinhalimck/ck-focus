@@ -2,9 +2,9 @@
  * Simple IndexedDB utility that works in both main thread and service worker
  */
 
-const DB_NAME = 'CKFocusDB';
+const DB_NAME = "CKFocusDB";
 const DB_VERSION = 1;
-const STORE_NAME = 'focusData';
+const STORE_NAME = "focusData";
 
 class IndexedDB {
   constructor() {
@@ -24,31 +24,31 @@ class IndexedDB {
       const request = indexedDB.open(DB_NAME, DB_VERSION);
 
       request.onerror = () => {
-        console.error('Failed to open IndexedDB:', request.error);
+        console.error("Failed to open IndexedDB:", request.error);
         reject(request.error);
       };
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('IndexedDB opened successfully');
+        console.log("IndexedDB opened successfully");
         resolve(this.db);
       };
 
       request.onupgradeneeded = (event) => {
         const db = event.target.result;
-        
+
         // Create object store if it doesn't exist
         if (!db.objectStoreNames.contains(STORE_NAME)) {
-          const store = db.createObjectStore(STORE_NAME, { 
-            keyPath: 'id',
-            autoIncrement: true 
+          const store = db.createObjectStore(STORE_NAME, {
+            keyPath: "id",
+            autoIncrement: true,
           });
-          
+
           // Create indexes for common queries
-          store.createIndex('timestamp', 'timestamp', { unique: false });
-          store.createIndex('type', 'type', { unique: false });
-          
-          console.log('Object store created');
+          store.createIndex("timestamp", "timestamp", { unique: false });
+          store.createIndex("type", "type", { unique: false });
+
+          console.log("Object store created");
         }
       };
     });
@@ -63,24 +63,24 @@ class IndexedDB {
    */
   async set(data) {
     await this.init();
-    
+
     const item = {
       ...data,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([STORE_NAME], 'readwrite');
+      const transaction = this.db.transaction([STORE_NAME], "readwrite");
       const store = transaction.objectStore(STORE_NAME);
       const request = store.add(item);
 
       request.onsuccess = () => {
-        console.log('Data stored with ID:', request.result);
+        console.log("Data stored with ID:", request.result);
         resolve(request.result);
       };
 
       request.onerror = () => {
-        console.error('Failed to store data:', request.error);
+        console.error("Failed to store data:", request.error);
         reject(request.error);
       };
     });
@@ -95,7 +95,7 @@ class IndexedDB {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([STORE_NAME], 'readonly');
+      const transaction = this.db.transaction([STORE_NAME], "readonly");
       const store = transaction.objectStore(STORE_NAME);
       const request = store.get(id);
 
@@ -104,7 +104,7 @@ class IndexedDB {
       };
 
       request.onerror = () => {
-        console.error('Failed to get data:', request.error);
+        console.error("Failed to get data:", request.error);
         reject(request.error);
       };
     });
@@ -119,9 +119,9 @@ class IndexedDB {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([STORE_NAME], 'readonly');
+      const transaction = this.db.transaction([STORE_NAME], "readonly");
       const store = transaction.objectStore(STORE_NAME);
-      const index = store.index('type');
+      const index = store.index("type");
       const request = index.getAll(type);
 
       request.onsuccess = () => {
@@ -129,7 +129,7 @@ class IndexedDB {
       };
 
       request.onerror = () => {
-        console.error('Failed to get data by type:', request.error);
+        console.error("Failed to get data by type:", request.error);
         reject(request.error);
       };
     });
@@ -143,7 +143,7 @@ class IndexedDB {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([STORE_NAME], 'readonly');
+      const transaction = this.db.transaction([STORE_NAME], "readonly");
       const store = transaction.objectStore(STORE_NAME);
       const request = store.getAll();
 
@@ -152,7 +152,7 @@ class IndexedDB {
       };
 
       request.onerror = () => {
-        console.error('Failed to get all data:', request.error);
+        console.error("Failed to get all data:", request.error);
         reject(request.error);
       };
     });
@@ -175,21 +175,21 @@ class IndexedDB {
     const updated = {
       ...existing,
       ...updates,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([STORE_NAME], 'readwrite');
+      const transaction = this.db.transaction([STORE_NAME], "readwrite");
       const store = transaction.objectStore(STORE_NAME);
       const request = store.put(updated);
 
       request.onsuccess = () => {
-        console.log('Data updated with ID:', request.result);
+        console.log("Data updated with ID:", request.result);
         resolve(updated);
       };
 
       request.onerror = () => {
-        console.error('Failed to update data:', request.error);
+        console.error("Failed to update data:", request.error);
         reject(request.error);
       };
     });
@@ -204,17 +204,17 @@ class IndexedDB {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([STORE_NAME], 'readwrite');
+      const transaction = this.db.transaction([STORE_NAME], "readwrite");
       const store = transaction.objectStore(STORE_NAME);
       const request = store.delete(id);
 
       request.onsuccess = () => {
-        console.log('Data deleted with ID:', id);
+        console.log("Data deleted with ID:", id);
         resolve(true);
       };
 
       request.onerror = () => {
-        console.error('Failed to delete data:', request.error);
+        console.error("Failed to delete data:", request.error);
         reject(request.error);
       };
     });
@@ -228,17 +228,17 @@ class IndexedDB {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([STORE_NAME], 'readwrite');
+      const transaction = this.db.transaction([STORE_NAME], "readwrite");
       const store = transaction.objectStore(STORE_NAME);
       const request = store.clear();
 
       request.onsuccess = () => {
-        console.log('All data cleared');
+        console.log("All data cleared");
         resolve(true);
       };
 
       request.onerror = () => {
-        console.error('Failed to clear data:', request.error);
+        console.error("Failed to clear data:", request.error);
         reject(request.error);
       };
     });
@@ -251,7 +251,7 @@ class IndexedDB {
     if (this.db) {
       this.db.close();
       this.db = null;
-      console.log('Database connection closed');
+      console.log("Database connection closed");
     }
   }
 }
@@ -271,5 +271,5 @@ export const {
   update,
   delete: deleteItem,
   clear,
-  close
+  close,
 } = db;

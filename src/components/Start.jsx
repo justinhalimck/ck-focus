@@ -13,10 +13,16 @@ const Start = () => {
           background: "linear-gradient(0deg, #D5E9EA 0%, #0074D9 100%)",
         }}
       >
-        <div style={{ marginTop: "20vh", color: "white", fontSize: "24px" }}>
+        <div
+          style={{
+            marginTop: "20vh",
+            padding: "1em",
+            color: "white",
+            fontSize: "24px",
+          }}
+        >
           <Logo />
-          <h1>ポモドーロ</h1>
-          <h2>Tadasi</h2>
+          <h1>Colorkrew Focus</h1>
         </div>
         <Button
           onClick={() => navigate("/dashboard")}

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import CountdownTimer from "./components/CountdownTimer";
 import "./App.css";
-import { CssBaseline } from "@mui/material";
 import db from "./utils/indexeddb";
 
 function App() {
@@ -70,13 +68,6 @@ function App() {
 
   return (
     <>
-      <CssBaseline />
-      <CountdownTimer
-        code="000000"
-        name="Example Project"
-        duration={10}
-        onComplete={() => console.log("Complete.")}
-      />
       <div className="card">
         <button type="button" onClick={() => setCount((count) => count + 1)}>
           count is {count}

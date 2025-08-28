@@ -26,7 +26,7 @@ const Home = () => {
           <h2>Tadasi</h2>
         </div>
         <Button
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/work")}
           sx={{
             marginTop: "15vh",
             borderRadius: "40px",

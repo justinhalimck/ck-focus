@@ -5,8 +5,8 @@ import SubjectInfo from "../components/Work/SubjectInfo";
 
 const Work = () => {
   const [mode, setMode] = useState("rest");
-  const [code, setCode] = useState("000000");
-  const [subjectName, setSubjectName] = useState("Example Project");
+  const [code, setCode] = useState(null);
+  const [subjectName, setSubjectName] = useState(null);
 
   return (
     <div
@@ -37,7 +37,11 @@ const Work = () => {
               }}
             />
           </div>
-          <CountdownTimer duration={3} onComplete={() => setMode("work")} />
+          {code ? (
+            <CountdownTimer duration={3} onComplete={() => setMode("work")} />
+          ) : (
+            <CountdownTimer duration={0} onComplete={() => { }} />
+          )}
         </>
       )}
     </div>

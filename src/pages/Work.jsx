@@ -1,11 +1,12 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CountdownTimer from "../components/CountdownTimer";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
+import db from "../utils/indexeddb";
 
 const WORK_DURATION = 7;
 const REST_DURATION = 5;
@@ -18,15 +19,19 @@ const Work = () => {
   const [subjectName, setSubjectName] = useState(null);
   const [startTime, setStartTime] = useState(null);
 
+  useEffect(() => {
+    db.init();
+    SWClient.update();
+  });
+
   const saveTimeRecord = () => {
-    if (code && code !== newCode) {
-      const elapsed = Math.floor((Date.now() - startTime) / 1000);
-      SWClient.post(Messages.SaveTimeRecord, { code, elapsed });
-    }
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    SWClient.post(Messages.SaveTimeRecord, { code, elapsed });
   };
 
   const onSelect = (newCode, newSubject) => {
-    saveTimeRecord();
+    if (code && code !== newCode) saveTimeRecord();
+
     setCode(newCode);
     setSubjectName(newSubject);
     setStartTime(Math.floor(Date.now()));
@@ -60,7 +65,7 @@ const Work = () => {
             <SelectSubject currentCode={code} onSelect={onSelect} />
             <Button
               onClick={() => {
-                saveTimeRecord();
+                if (code) saveTimeRecord();
                 navigate("/end");
               }}
               sx={{
@@ -82,7 +87,7 @@ const Work = () => {
               onComplete={() => setMode("work")}
             />
           ) : (
-            <CountdownTimer duration={0} onComplete={() => { }} />
+            <CountdownTimer duration={0} onComplete={() => {}} />
           )}
         </>
       )}

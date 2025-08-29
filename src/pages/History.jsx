@@ -75,7 +75,11 @@ const History = () => {
                     return (
                       <ListItemText
                         key={crypto.randomUUID()}
-                        primary={PROJECTS[code]}
+                        primary={
+                          <div style={{ fontSize: "15px" }}>
+                            {PROJECTS[code]}
+                          </div>
+                        }
                         secondary={`${code} - ${formatTimeRecord(duration)}`}
                       />
                     );

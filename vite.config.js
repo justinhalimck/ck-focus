@@ -10,7 +10,7 @@ export default defineConfig({
       includeAssets: ["pomodoro.svg"],
       manifest: {
         name: "Colorkrew FOCUS",
-        short_name: "Pomodoro",
+        short_name: "ポモドーロ",
         description: "Next Gen Tadasi",
         theme_color: "#ffffff",
         icons: [

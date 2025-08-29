@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { formatTime } from "../utils/time";
 
 const CountdownTimer = ({ duration, onComplete }) => {
   const [remaining, setRemaining] = useState(duration);
-  const mins = Math.floor(remaining / 60);
-  const secs = remaining % 60;
-  const timeLeft = `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  const timeLeft = formatTime(remaining);
 
   useEffect(() => {
     let interval = null;

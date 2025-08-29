@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import db from "./utils/indexeddb";
-import { SWClient } from "./lib/sw";
-import { postAlarm, subscribeUser } from "./lib/api";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,16 +23,8 @@ function App() {
 
   useEffect(() => {
     if (count === 0) {
-      subscribeUser();
-      SWClient.update();
       return;
     }
-
-    postAlarm(
-      `my alarm ${count}`,
-      `alarm body ${count}`,
-      new Date().getTime() + 5000,
-    );
 
     // Store focus session data in IndexedDB
     const storeFocusSession = async () => {

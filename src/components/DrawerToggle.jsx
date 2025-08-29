@@ -29,7 +29,7 @@ const DrawerToggle = ({ color }) => {
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <div style={{ width: "50vw" }}>
+        <div style={{ width: "12em" }}>
           <List>
             <ListItem disablePadding>
               <ListItemButton onClick={() => navigate("/history")}>

@@ -41,7 +41,7 @@ export async function subscribeUser() {
       {
         headers: {
           "Content-Type": "application/json",
-          "x-focus-user": "incin",
+          "x-focus-user": localStorage.getItem('user'),
         },
       },
     )
@@ -58,6 +58,6 @@ export async function postAlarm(title, body, alertAt) {
       title,
       body,
     },
-    { headers: { "x-focus-user": "incin" } },
+    { headers: { "x-focus-user": localStorage.getItem('user') } },
   );
 }

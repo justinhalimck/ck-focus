@@ -5,6 +5,8 @@ import Logo from "../components/Icons/Logo";
 const Home = () => {
   const navigate = useNavigate();
 
+  localStorage.setItem('user', Math.random())
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div

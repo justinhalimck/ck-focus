@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { postAlarm, subscribeUser } from "./lib/api";
-import { SWClient } from "./lib/sw";
 import db from "./utils/indexeddb";
 
 function App() {

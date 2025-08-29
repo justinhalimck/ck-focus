@@ -163,7 +163,7 @@ function displayNotification(title, body) {
 
 self.addEventListener("push", (ev) => {
   const data = ev.data.json();
-  displayNotification(data.title, data.body);
+  displayNotification(data.title + " is ending!", "its time to take a break and choose your next project");
 });
 
 self.addEventListener("message", (ev) => {

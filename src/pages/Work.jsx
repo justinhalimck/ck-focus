@@ -8,9 +8,11 @@ import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
 import db from "../utils/indexeddb";
 import background_image from "../assets/select_proj_background.svg";
+import { postAlarm, subscribeUser } from "../lib/api";
 
 const WORK_DURATION = 7;
 const REST_DURATION = 5;
+const NOTIFICATION_DELAY = 3;
 
 const Work = () => {
   const navigate = useNavigate();
@@ -25,7 +27,8 @@ const Work = () => {
   useEffect(() => {
     db.init();
     SWClient.update();
-  });
+    subscribeUser();
+  }, []);
 
   const startWork = () => {
     if (currentCode && currentCode !== nextCode) {
@@ -36,6 +39,7 @@ const Work = () => {
       setCurrentCode(nextCode);
       setCurrentSubject(nextSubject);
       setMode("work");
+      postAlarm(nextSubject ?? " ", nextCode ?? " ", Date.now() + (WORK_DURATION - NOTIFICATION_DELAY) * 1000);
     }
   };
 

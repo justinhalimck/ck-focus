@@ -65,4 +65,9 @@ export async function postAlarm(title, body, alertAt) {
 export async function deleteAlarm() {
   axios.delete("https://pomodoro-api.incin.net/api/alarm", 
     {headers: { "x-focus-user": localStorage.getItem('user') }})
+  }
+  
+export async function getMyProfile() {
+  return axios.get("https://pomodoro-api.incin.net/api/me", 
+    {headers: { "x-focus-user": localStorage.getItem('user') }})
 }

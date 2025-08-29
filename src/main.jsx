@@ -10,6 +10,12 @@ import End from "./pages/End.jsx";
 import History from "./pages/History.jsx";
 import Home from "./pages/Home.jsx";
 import Work from "./pages/Work.jsx";
+import { getMyProfile } from "./lib/api.js";
+
+(async () => {
+  let profile = await getMyProfile();
+  localStorage.setItem('profile', profile);
+})()
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

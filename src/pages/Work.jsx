@@ -7,7 +7,7 @@ import DrawerToggle from "../components/DrawerToggle";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
 import ProjectProgress from "../components/Work/ProjectProgress";
-import { postAlarm, subscribeUser } from "../lib/api";
+import { postAlarm, subscribeUser, deleteAlarm } from "../lib/api";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
 import { timeAfterSeconds } from "../lib/utils";
@@ -62,6 +62,7 @@ const Work = () => {
     if (currentCode) {
       saveTimeRecord();
     }
+    deleteAlarm();
     navigate("/end");
   };
 

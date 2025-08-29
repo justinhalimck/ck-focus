@@ -6,7 +6,8 @@ import { mockHistory } from "../mock/history";
 import { UserDashboard } from "../components/dashboard/UserDashboard";
 import { ProjectDashboard } from "../components/dashboard/ProjectDashboard";
 import MainIcon from "../assets/main_icon.svg";
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ClockIcon from "../components/Icons/ClockIcon";
 
 export const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("user");
@@ -59,7 +60,7 @@ export const Dashboard = () => {
         alignItems: "start",
         gap: 2,
         width: "100vw",
-        height: '100vh',
+        height: "100vh",
         background: "linear-gradient(0deg, #FAFAFA 0%, #F4FAFF 100%)",
       }}
     >
@@ -67,6 +68,7 @@ export const Dashboard = () => {
         sx={{
           display: "flex",
           alignItems: "center",
+          width: "100%",
           gap: 2,
         }}
       >
@@ -75,6 +77,22 @@ export const Dashboard = () => {
           ポモドーロ dashboard [by{" "}
           {`${activeTab === "user" ? "Users" : "Projects"}`}]
         </Typography>
+        <Box sx={{ marginLeft: "auto" }}>
+          <Button
+            href="https://www.tadasi.jp/"
+            target="_blank"
+            variant="contained"
+            size="small"
+            sx={{
+              borderRadius: "40px",
+              paddingX: "2em",
+              textTransform: "none",
+            }}
+          >
+            <div style={{ marginRight: "0.5em" }}>Tadasi</div>
+            <ClockIcon />
+          </Button>
+        </Box>
       </Box>
       <Box
         sx={{
@@ -91,8 +109,8 @@ export const Dashboard = () => {
             alignItems: "center",
             gap: 1,
             "&:hover": {
-                cursor: "pointer",
-            }
+              cursor: "pointer",
+            },
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: 600 }}>

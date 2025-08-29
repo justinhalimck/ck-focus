@@ -32,30 +32,35 @@ const Work = () => {
       saveTimeRecord();
       setStartTime(Date.now());
     }
-    setCurrentCode(nextCode);
-    setCurrentSubject(nextSubject);
-    setMode("work");  
+    if (nextCode) {
+      setCurrentCode(nextCode);
+      setCurrentSubject(nextSubject);
+      setMode("work");
+    }
   };
 
   const endWork = () => {
     if (currentCode) {
       saveTimeRecord();
-      setCurrentCode(null);
-      setCurrentSubject(null);
-      setNextCode(null);
-      setNextSubject(null);
     }
     navigate("/end");
   };
 
   const saveTimeRecord = () => {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    SWClient.post(Messages.SaveTimeRecord, { code: currentCode, elapsed });
+    const start = new Date(startTime);
+    const end = new Date();
+    const elapsed = Math.floor((end - start) / 1000);
+    SWClient.post(Messages.SaveTimeRecord, {
+      code: currentCode,
+      start,
+      end,
+      elapsed,
+    });
   };
 
-  const changeCode = (newCode, newSubject) => {
-    setNextCode(newCode);
-    setNextSubject(newSubject);
+  const changeCode = (code, subject) => {
+    setNextCode(code);
+    setNextSubject(subject);
     if (!currentCode) {
       setStartTime(Date.now());
       startWork();
@@ -67,13 +72,13 @@ const Work = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        backgroundPosition: 'center',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundImage: 
+        backgroundPosition: "center",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundImage:
           mode === "work"
             ? "linear-gradient(0deg, #D5E9EA 0%, #0074D9 100%)"
-            : `url(${background_image}), linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)`, 
+            : `url(${background_image}), linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)`,
       }}
     >
       {mode === "work" && (
@@ -106,8 +111,11 @@ const Work = () => {
               Stop working
             </Button>
           </div>
-          {currentCode ? (
-            <CountdownTimer duration={REST_DURATION} onComplete={startWork} />
+          {nextCode ? (
+            <CountdownTimer
+              duration={REST_DURATION}
+              onComplete={() => startWork(nextCode, nextSubject)}
+            />
           ) : (
             <CountdownTimer duration={0} onComplete={() => { }} />
           )}

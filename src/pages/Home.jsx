@@ -14,7 +14,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", textAlign: "center" }}
+    >
       <div
         style={{
           height: "100vh",

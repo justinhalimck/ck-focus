@@ -161,6 +161,30 @@ function displayNotification(title, body) {
   self.registration.showNotification(title, { body: body });
 }
 
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close() // Close the notification
+
+  // URL you want to open when notification is clicked
+  const targetUrl = '/work'
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then((clientList) => {
+        // If the app is already open, focus it
+        for (const client of clientList) {
+          if (client.url.includes(self.location.origin) && 'focus' in client) {
+            client.focus()
+            return
+          }
+        }
+        // If not open, open a new window
+        if (self.clients.openWindow) {
+          return self.clients.openWindow(targetUrl)
+        }
+      })
+  )
+})
+
 self.addEventListener("push", (ev) => {
   const data = ev.data.json();
 

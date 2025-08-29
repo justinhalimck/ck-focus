@@ -13,8 +13,8 @@ import { SWClient } from "../lib/sw";
 import { timeAfterSeconds } from "../lib/utils";
 import db from "../utils/indexeddb";
 
-const WORK_DURATION = 60;
-const REST_DURATION = 30;
+const WORK_DURATION = 30;
+const REST_DURATION = 15;
 const NOTIFICATION_DELAY = 3;
 
 const Work = () => {
@@ -110,7 +110,6 @@ const Work = () => {
     >
       {mode === "work" && (
         <>
-          <DrawerToggle color="white" />
           <div style={{ height: "90vh" }}>
             <ProjectInfo code={currentCode} name={currentProject} />
           </div>
@@ -140,54 +139,46 @@ const Work = () => {
       {mode === "rest" && (
         <>
           {growthCheckCode ? (
-            <>
-              <DrawerToggle
-                color="black"
+            <div style={{ height: "90vh" }}>
+              <ProjectProgress
+                code={growthCheckCode}
+                project={growthCheckProject}
                 onBack={() => setGrowthCheckCode(null)}
               />
-              <div style={{ height: "90vh" }}>
-                <ProjectProgress
-                  code={growthCheckCode}
-                  project={growthCheckProject}
-                  onBack={() => setGrowthCheckCode(null)}
-                />
-              </div>
-            </>
+            </div>
           ) : (
-            <>
-              <DrawerToggle color="black" />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "90vh",
-                }}
-              >
-                <div>
-                  <SelectProject
-                    currentCode={currentCode}
-                    onSelect={changeCode}
-                    onGrowthCheck={growthCheck}
-                  />
-                  {currentCode && (
-                    <Button
-                      onClick={endWork}
-                      sx={{
-                        marginTop: "10vh",
-                        borderRadius: "40px",
-                        background: "#28272C",
-                        textTransform: "none",
-                        fontSize: "14px",
-                        paddingX: "10vw",
-                        color: "white",
-                      }}
-                    >
-                      Stop working
-                    </Button>
-                  )}
-                </div>
+            <div
+              style={{
+                marginTop: "10vh",
+                display: "flex",
+                flexDirection: "column",
+                height: "90vh",
+              }}
+            >
+              <div>
+                <SelectProject
+                  currentCode={currentCode}
+                  onSelect={changeCode}
+                  onGrowthCheck={growthCheck}
+                />
+                {currentCode && (
+                  <Button
+                    onClick={endWork}
+                    sx={{
+                      marginTop: "10vh",
+                      borderRadius: "40px",
+                      background: "#28272C",
+                      textTransform: "none",
+                      fontSize: "14px",
+                      paddingX: "10vw",
+                      color: "white",
+                    }}
+                  >
+                    Stop working
+                  </Button>
+                )}
               </div>
-            </>
+            </div>
           )}
           <div style={{ position: "absolute", bottom: 0, width: "100vw" }}>
             {nextCode ? (

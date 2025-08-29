@@ -21,6 +21,7 @@ const ProjectProgress = ({ code, subject }) => {
                 color: "#28272C",
                 fontSize: "14px",
                 fontWeight: "400",
+                margin: "4vw",
             }}>
                 Collaborative effort to master your task.
             </div>
@@ -40,6 +41,13 @@ const ProjectProgress = ({ code, subject }) => {
                 {code === "943215" && (<img src={tree_stage_2} alt="tree" style={{height: "35vw", marginTop: "37vw"}}/>)}
                 {code === "923303" && (<img src={tree_stage_3} alt="tree" style={{height: "50vw", marginTop: "22vw"}}/>)}
                 {code === "943226" && (<img src={tree_stage_3} alt="tree" style={{height: "50vw", marginTop: "22vw"}}/>)}
+            </div>
+            <div style={{
+                color: "#28272C",
+                fontSize: "14px",
+                fontWeight: 600,
+            }}>
+                Current Level
             </div>
         
         </div>

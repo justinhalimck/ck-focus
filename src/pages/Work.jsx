@@ -49,6 +49,7 @@ const Work = () => {
       setCurrentCode(nextCode);
       setCurrentSubject(nextSubject);
       setMode("work");
+      setGrowthCheckCode(null);
       postAlarm(
         nextSubject ?? " ",
         nextCode ?? " ",
@@ -112,7 +113,7 @@ const Work = () => {
           <div style={{ height: "90vh" }}>
             <SubjectInfo code={currentCode} name={currentSubject} />
           </div>
-          <div style={{ position: "absolute", bottom: 0, width: "100vw" }}>
+          <div style={{ position: "absolute", bottom: 0, width: "100vw", zIndex: 0 }}>
             <CountdownTimer
               variant="red"
               duration={WORK_DURATION}

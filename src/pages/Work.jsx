@@ -1,9 +1,11 @@
+import { Button } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import CountdownTimer from "../components/CountdownTimer";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router";
+import { Messages } from "../lib/messages";
+import { SWClient } from "../lib/sw";
 
 const WORK_DURATION = 7;
 const REST_DURATION = 5;
@@ -14,6 +16,21 @@ const Work = () => {
   const [mode, setMode] = useState("rest");
   const [code, setCode] = useState(null);
   const [subjectName, setSubjectName] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+
+  const saveTimeRecord = () => {
+    if (code && code !== newCode) {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      SWClient.post(Messages.SaveTimeRecord, { code, elapsed });
+    }
+  };
+
+  const onSelect = (newCode, newSubject) => {
+    saveTimeRecord();
+    setCode(newCode);
+    setSubjectName(newSubject);
+    setStartTime(Math.floor(Date.now()));
+  };
 
   return (
     <div
@@ -40,15 +57,12 @@ const Work = () => {
       {mode === "rest" && (
         <>
           <div style={{ height: "90vh" }}>
-            <SelectSubject
-              currentCode={code}
-              onSelect={(code, name) => {
-                setCode(code);
-                setSubjectName(name);
-              }}
-            />
+            <SelectSubject currentCode={code} onSelect={onSelect} />
             <Button
-              onClick={() => navigate("/end")}
+              onClick={() => {
+                saveTimeRecord();
+                navigate("/end");
+              }}
               sx={{
                 marginTop: "15vh",
                 borderRadius: "40px",
@@ -68,7 +82,7 @@ const Work = () => {
               onComplete={() => setMode("work")}
             />
           ) : (
-            <CountdownTimer duration={0} onComplete={() => {}} />
+            <CountdownTimer duration={0} onComplete={() => { }} />
           )}
         </>
       )}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import db from "./utils/indexeddb";
+import { getMyProfile } from "./lib/api";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,6 +21,16 @@ function App() {
 
     initDB();
   }, []);
+
+  // Initialize me
+  useEffect(() => {
+    const initMe = async () => {
+      const res = await getMyProfile()
+      console.log('init me', res)
+    }
+
+    initMe()
+  }, [])
 
   useEffect(() => {
     if (count === 0) {

@@ -76,3 +76,14 @@ export async function getUsers() {
   return axios.get("https://pomodoro-api.incin.net/api/users", 
     {headers: { "x-focus-user": localStorage.getItem('user') }})
 }
+
+export async function postInvite(id, to) {
+  axios.post(
+    "http://localhost:5175/api/invite",
+    {
+      id,
+      to,
+    },
+    { headers: { "x-focus-user": localStorage.getItem('user') } },
+  );
+}

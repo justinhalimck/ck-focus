@@ -164,11 +164,15 @@ function displayNotification(title, body) {
 self.addEventListener("push", (ev) => {
   const data = ev.data.json();
 
-  console.log("PUSHED")
-
   let description = "its time to take a break and choose your next project"
   if (data.title === "break")
     description = "Change projects or continue"
+
+  if (data.title === "invite") {
+    displayNotification("You're invited!", "Your friend invited you to CK Focus! Click to join.", data);
+    console.log("Invitation notification displayed", data);
+    return
+  }
 
   displayNotification(data.title + " is ending!", description);
 });
@@ -179,6 +183,55 @@ self.addEventListener("message", (ev) => {
   const payload = message.body;
 
   handleMessage(messageID, payload);
+});
+
+// Currently for invitation only
+self.addEventListener("notificationclick", async (ev) => {
+  console.log("SW: Notification clicked", ev);
+  
+  // Close the notification
+  ev.notification.close();
+ 
+  // Get notification data
+  const notificationData = ev.notification.data || {};
+  const title = ev.notification.title;
+  // if (!title.includes("invite") || notificationData.title !== "invite") {
+  //   return;
+  // }
+  const targetUrl = "http://localhost:5173/join?id=" + (notificationData.body?.id || '');
+  // Store click event in IndexedDB
+  try {
+    await swDB.set({
+      type: "sw-event",
+      value: {
+        event: "notificationclick",
+        title: title,
+        data: notificationData,
+        targetUrl: targetUrl,
+        timestamp: new Date().toISOString(),
+      },
+    });
+  } catch (error) {
+    console.error("SW: Failed to store notification click event:", error);
+  }
+  
+  // Handle the click - open window or focus existing one
+  ev.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Check if there's already a window open
+      for (const client of clientList) {
+        if (client.url.includes(self.location.origin)) {
+          // Focus existing window and navigate to target URL
+          return client.focus().then(() => {
+            return client.navigate(targetUrl);
+          });
+        }
+      }
+    })
+  );
+
+  // No existing window, open a new one
+  return self.clients.openWindow(targetUrl);
 });
 
 function handleMessage(messageID, payload) {

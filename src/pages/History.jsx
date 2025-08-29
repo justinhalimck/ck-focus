@@ -10,6 +10,7 @@ const History = () => {
       .then(() => db.getAll())
       .then((arr) =>
         arr
+          .filter((event) => event.value.event === "message")
           .filter(
             (event) => event.value.data.messageID === Messages.SaveTimeRecord,
           )

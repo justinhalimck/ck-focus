@@ -1,9 +1,23 @@
 import { Avatar, Button, Divider, IconButton } from "@mui/material";
 import { useNavigate } from "react-router";
 import BackIcon from "../assets/circle-chevron-left.svg";
+import { useEffect, useState } from "react";
+import { getUsers } from "../lib/api";
 
 const Invite = ({ userName, project }) => {
   const navigate = useNavigate();
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const profiles = await getUsers();
+      setUsers(profiles.users)
+    })()
+  }, [])
+
+  if (!users) return;
+
+  const user = users[1];
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -27,14 +41,14 @@ const Invite = ({ userName, project }) => {
             padding: "24px",
           }}
         >
-          <Avatar sx={{ height: "5em", width: "5em" }} />
+          <Avatar sx={{ height: "5em", width: "5em" }} src={user.img}/>
           <div style={{ marginY: "8px", textAlign: "center" }}>
             <div style={{ marginTop: "8px" }}>PM</div>
             <div style={{ marginTop: "8px", fontWeight: "bold" }}>
-              {userName}
+              {user.firstName} {user.lastName}
             </div>
-            <div>user.name@company.com</div>
-            <div style={{ marginTop: "8px" }}>Department</div>
+            <div>{user.email}</div>
+            <div style={{ marginTop: "8px" }}>{user.department}</div>
           </div>
           <Divider sx={{ marginY: "16px", width: "70vw" }} />
         </div>
@@ -48,7 +62,7 @@ const Invite = ({ userName, project }) => {
         >
           <div style={{ marginTop: "4em" }}>
             You will invite{" "}
-            <span style={{ fontWeight: "bold" }}>{userName}</span> to the
+            <span style={{ fontWeight: "bold" }}>{user.firstName} {user.lastName}</span> to the
             project:
           </div>
           <h1 style={{ margin: 0 }}>{project}</h1>

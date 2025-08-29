@@ -12,7 +12,7 @@ import db from "../utils/indexeddb";
 import { timeAfterSeconds } from "../lib/utils";
 
 const WORK_DURATION = 7;
-const REST_DURATION = 500;
+const REST_DURATION = 5;
 const NOTIFICATION_DELAY = 3;
 
 const Work = () => {

@@ -4,17 +4,17 @@ import { useNavigate } from "react-router";
 import background_image from "../assets/select_proj_background.svg";
 import CountdownTimer from "../components/CountdownTimer";
 import DrawerToggle from "../components/DrawerToggle";
+import ProjectProgress from "../components/Work/ProjectProgress";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
-import ProjectProgress from "../components/Work/ProjectProgress";
-import { postAlarm, subscribeUser, deleteAlarm } from "../lib/api";
+import { deleteAlarm, postAlarm, subscribeUser } from "../lib/api";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
 import { timeAfterSeconds } from "../lib/utils";
 import db from "../utils/indexeddb";
 
-const WORK_DURATION = 7;
-const REST_DURATION = 500;
+const WORK_DURATION = 60;
+const REST_DURATION = 30;
 const NOTIFICATION_DELAY = 3;
 
 const Work = () => {
@@ -114,7 +114,14 @@ const Work = () => {
           <div style={{ height: "90vh" }}>
             <SubjectInfo code={currentCode} name={currentSubject} />
           </div>
-          <div style={{ position: "absolute", bottom: 0, width: "100vw", zIndex: 0 }}>
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              width: "100vw",
+              zIndex: 0,
+            }}
+          >
             <CountdownTimer
               variant="red"
               duration={WORK_DURATION}
@@ -132,43 +139,56 @@ const Work = () => {
       )}
       {mode === "rest" && (
         <>
-        {growthCheckCode 
-          ? <>
-              <DrawerToggle color="black" onBack={() => setGrowthCheckCode(null)}/>
+          {growthCheckCode ? (
+            <>
+              <DrawerToggle
+                color="black"
+                onBack={() => setGrowthCheckCode(null)}
+              />
               <div style={{ height: "90vh" }}>
-                <ProjectProgress code={growthCheckCode} subject={growthCheckSubject} onBack={() => setGrowthCheckCode(null)}/>
+                <ProjectProgress
+                  code={growthCheckCode}
+                  subject={growthCheckSubject}
+                  onBack={() => setGrowthCheckCode(null)}
+                />
               </div>
             </>
-          : <>
-            <DrawerToggle color="black" />
-            <div
-            style={{
-            display: "flex",
-            flexDirection: "column",
-            height: "90vh",
-            }}
-            >
-              <div>
-                <SelectSubject currentCode={currentCode} onSelect={changeCode} onGrowthCheck={growthCheck}/>
-                {currentCode && (
-                  <Button
-                    onClick={endWork}
-                    sx={{
-                      marginTop: "10vh",
-                      borderRadius: "40px",
-                      background: "#28272C",
-                      textTransform: "none",
-                      fontSize: "14px",
-                      paddingX: "10vw",
-                      color: "white",
-                    }}
-                  >
-                    Stop working
-                  </Button>
-                )}
+          ) : (
+            <>
+              <DrawerToggle color="black" />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "90vh",
+                }}
+              >
+                <div>
+                  <SelectSubject
+                    currentCode={currentCode}
+                    onSelect={changeCode}
+                    onGrowthCheck={growthCheck}
+                  />
+                  {currentCode && (
+                    <Button
+                      onClick={endWork}
+                      sx={{
+                        marginTop: "10vh",
+                        borderRadius: "40px",
+                        background: "#28272C",
+                        textTransform: "none",
+                        fontSize: "14px",
+                        paddingX: "10vw",
+                        color: "white",
+                      }}
+                    >
+                      Stop working
+                    </Button>
+                  )}
+                </div>
               </div>
-            </div>
-          </>}
+            </>
+          )}
           <div style={{ position: "absolute", bottom: 0, width: "100vw" }}>
             {nextCode ? (
               <CountdownTimer
@@ -184,9 +204,10 @@ const Work = () => {
               />
             )}
           </div>
-          </>
+        </>
       )}
     </div>
-)};
+  );
+};
 
 export default Work;

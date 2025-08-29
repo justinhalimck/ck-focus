@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import HamburgerIcon from "./Icons/HamburgerIcon";
 import BackIcon from "../assets/circle-chevron-left.svg";
+import HamburgerIcon from "./Icons/HamburgerIcon";
 
 const DrawerToggle = ({ color, onBack }) => {
   const navigate = useNavigate();
@@ -17,10 +17,10 @@ const DrawerToggle = ({ color, onBack }) => {
 
   return (
     <>
-      <div style={{ display: "flex", height:"10vh", padding: "0 8vw 0 8vw" }}>
+      <div style={{ display: "flex", height: "10vh", padding: "0 8vw 0 8vw" }}>
         {onBack && (
-          <IconButton onClick={onBack} >
-            <img src={BackIcon} alt="back"/>
+          <IconButton onClick={onBack}>
+            <img src={BackIcon} alt="back" />
           </IconButton>
         )}
         <IconButton

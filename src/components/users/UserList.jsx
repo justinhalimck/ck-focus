@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../../lib/api";
 import UserListItem from "./UserListItem";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-export default function UserList({onSelect}) {
+export default function UserList({onSelect, projectCode}) {
     const [users, setUsers] = useState(null);
 
   useEffect(() => {

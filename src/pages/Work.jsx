@@ -31,8 +31,8 @@ const Work = () => {
     SWClient.update();
     subscribeUser();
 
-    if(!localStorage.getItem('user')) {
-      localStorage.setItem('user', Math.floor(Math.random() * 1000))
+    if (!localStorage.getItem("user")) {
+      localStorage.setItem("user", Math.floor(Math.random() * 1000));
     }
   }, []);
 
@@ -126,7 +126,7 @@ const Work = () => {
             height: "90vh",
           }}
         >
-          <div style={{ marginTop: "5vh" }}>
+          <div>
             <SelectSubject currentCode={currentCode} onSelect={changeCode} />
             {currentCode && (
               <Button

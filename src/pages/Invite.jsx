@@ -17,11 +17,11 @@ const Invite = ({ userName, project }) => {
 
   if (!users) return;
 
-  const user = users[1];
+  let r = Math.floor(Math.random() * (users?.users?.length ?? 0));
+  const user = users[r];
 
   const handleInvite = async () => {
-    const usersRes = await getUsers()
-    const invitee = usersRes.users[0]
+    const invitee = user;
     await postInvite('invite-1', invitee.id);
     alert(`invitation sent to ${invitee.firstName} ${invitee.lastName}`);
   }

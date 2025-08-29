@@ -222,7 +222,7 @@ self.addEventListener("notificationclick", async (ev) => {
   // if (!title.includes("invite") || notificationData.title !== "invite") {
   //   return;
   // }
-  const targetUrl = "http://localhost:5173/join?id=" + (notificationData.body?.id || '');
+  const targetUrl = "http://pomdoro.incin.net/join?id=" + (notificationData.body?.id || '');
   // Store click event in IndexedDB
   try {
     await swDB.set({

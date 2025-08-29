@@ -3,9 +3,8 @@ import { getUsers } from "../../lib/api";
 import UserListItem from "./UserListItem";
 import { Box, Divider, Typography } from "@mui/material";
 
-export default function UserList({ onSelect, projectCode, showSelf = false }) {
-  const me = localStorage.getItem("user");
-  const [users, setUsers] = useState(null);
+export default function UserList({onSelect}) {
+    const [users, setUsers] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -50,7 +49,6 @@ export default function UserList({ onSelect, projectCode, showSelf = false }) {
   return (
     <Box sx={{ width: "80vw", padding: "2vh 0 2vh 0" }}>
       {projectUsers.map((u) => {
-        if (!showSelf && u.id === String(me)) return;
         return <UserListItem key={u.uuid} user={u} onClick={onSelect} />;
       })}
     </Box>

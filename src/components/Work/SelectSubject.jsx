@@ -16,12 +16,7 @@ const SelectSubject = ({ currentCode, onSelect }) => {
           label: v,
           code: k,
         }))}
-        sx={{
-          margin: "2em",
-          marginTop: "10vh",
-          textAlign: "left",
-          width: "80vw",
-        }}
+        sx={{ textAlign: "left", width: "80vw" }}
         value={currentCode}
         renderInput={(params) => (
           <TextField {...params} label="Select subject" />

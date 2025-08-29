@@ -1,18 +1,17 @@
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router";
-import Logo from "../components/Icons/Logo";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import DrawerToggle from "../components/DrawerToggle";
+import Logo from "../components/Icons/Logo";
 
 const Home = () => {
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    if(!localStorage.getItem('user')) {
-      localStorage.setItem('user', Math.floor(Math.random() * 1000))
+    if (!localStorage.getItem("user")) {
+      localStorage.setItem("user", Math.floor(Math.random() * 1000));
     }
-  }, [])
-
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -22,6 +21,7 @@ const Home = () => {
           background: "linear-gradient(0deg, #D5E9EA 0%, #0074D9 100%)",
         }}
       >
+        <DrawerToggle color="white" />
         <div
           style={{
             marginTop: "15vh",

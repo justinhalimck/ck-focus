@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { formatTime } from "../utils/time";
 
-const CountdownTimer = ({ duration, onComplete }) => {
+const CountdownTimer = ({ variant, duration, onComplete }) => {
   const [remaining, setRemaining] = useState(duration);
   const timeLeft = formatTime(remaining);
 
@@ -25,8 +25,8 @@ const CountdownTimer = ({ duration, onComplete }) => {
         justifyContent: "center",
         alignItems: "center",
         height: "10vh",
-        background: "#FFE3E3",
-        color: "#FF5656",
+        ...(variant === "red" && { background: "#FFE3E3", color: "#FF5656" }),
+        ...(variant === "green" && { background: "#E3FFE7", color: "#299234" }),
         fontSize: "32px",
         fontWeight: 600,
       }}

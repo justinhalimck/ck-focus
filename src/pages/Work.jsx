@@ -105,6 +105,7 @@ const Work = () => {
           </div>
           <div style={{ position: "absolute", bottom: 0, width: "100vw" }}>
             <CountdownTimer
+              variant="red"
               duration={WORK_DURATION}
               onComplete={() => {
                 setMode("rest");
@@ -148,11 +149,16 @@ const Work = () => {
           <div style={{ position: "absolute", bottom: 0, width: "100vw" }}>
             {nextCode ? (
               <CountdownTimer
+                variant="green"
                 duration={REST_DURATION}
                 onComplete={() => startWork(nextCode, nextSubject)}
               />
             ) : (
-              <CountdownTimer duration={0} onComplete={() => { }} />
+              <CountdownTimer
+                variant="green"
+                duration={0}
+                onComplete={() => { }}
+              />
             )}
           </div>
         </div>

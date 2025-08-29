@@ -1,11 +1,18 @@
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import Logo from "../components/Icons/Logo";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  localStorage.setItem('user', Math.floor(Math.random() * 1000))
+
+  useEffect(() => {
+    if(!localStorage.getItem('user')) {
+      localStorage.setItem('user', Math.floor(Math.random() * 1000))
+    }
+  }, [])
+
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>

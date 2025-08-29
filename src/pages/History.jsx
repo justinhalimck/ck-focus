@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import HistoryIcon from "../components/Icons/HistoryIcon";
 import { Messages } from "../lib/messages";
 import db from "../utils/indexeddb";
+import { SUBJECTS } from "../utils/subjects";
+import { formatTimeRecord } from "../utils/time";
 
 const History = () => {
   const [data, setData] = useState([]);
@@ -19,28 +22,65 @@ const History = () => {
       .then(setData);
   }, []);
 
+  const groups = {};
+  data.forEach((record) => {
+    const date = record.start.toISOString().slice(0, 10);
+    if (!groups[date]) groups[date] = [];
+    groups[date].push(record);
+  });
+  console.log(groups);
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div
         style={{
           height: "100vh",
+          padding: "1em",
+          textAlign: "left",
           background: "linear-gradient(180deg, #DDEFFF 0%, #F8F8F8 100%)",
         }}
       >
-        <h1>History</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ margin: "1em" }}>
+            <HistoryIcon />
+          </div>
+          <h1 style={{ margin: 0 }}>History</h1>
+        </div>
         <div
           style={{
             maxHeight: "80vh",
             margin: "1em",
+            padding: "1em",
             borderRadius: "4px",
             background: "white",
             textAlign: "left",
             overflowY: "auto",
           }}
         >
-          <pre style={{ whiteSpace: "pre-wrap", fontSize: 10 }}>
-            {JSON.stringify(data, 2, null)}
-          </pre>
+          {Object.keys(groups).map((date) => {
+            return (
+              <>
+                <div style={{ fontWeight: "bold" }}>{date}</div>
+                <div style={{ height: 1, background: "#E1E1F3" }}></div>
+                {groups[date].map((record) => {
+                  return (
+                    <div
+                      key={crypto.randomUUID()}
+                      style={{ marginTop: "0.5em" }}
+                    >
+                      {record.code} {SUBJECTS[record.code]} (
+                      {formatTimeRecord(record.elapsed)})
+                    </div>
+                  );
+                })}
+              </>
+            );
+          })}
         </div>
       </div>
     </div>

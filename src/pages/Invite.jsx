@@ -1,9 +1,17 @@
 import { Avatar, Button, Divider, IconButton } from "@mui/material";
 import { useNavigate } from "react-router";
 import BackIcon from "../assets/circle-chevron-left.svg";
+import { getUsers, postInvite } from "../lib/api";
 
 const Invite = ({ userName, project }) => {
   const navigate = useNavigate();
+
+  const handleInvite = async () => {
+    const usersRes = await getUsers()
+    const invitee = usersRes.users[0]
+    await postInvite('invite-1', invitee.id);
+    alert(`invitation sent to ${invitee.firstName} ${invitee.lastName}`);
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -73,6 +81,7 @@ const Invite = ({ userName, project }) => {
                 background: "black",
                 textTransform: "none",
               }}
+              onClick={handleInvite}
             >
               Confirm
             </Button>

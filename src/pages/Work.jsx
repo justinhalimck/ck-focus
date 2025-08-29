@@ -6,6 +6,7 @@ import CountdownTimer from "../components/CountdownTimer";
 import DrawerToggle from "../components/DrawerToggle";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
+import ProjectProgress from "../components/Work/ProjectProgress";
 import { postAlarm, subscribeUser } from "../lib/api";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
@@ -20,6 +21,8 @@ const Work = () => {
   const navigate = useNavigate();
 
   const [mode, setMode] = useState("rest");
+  const [growthCheckCode, setGrowthCheckCode] = useState(null);
+  const [growthCheckSubject, setGrowthCheckSubject] = useState(null);
   const [currentCode, setCurrentCode] = useState(null);
   const [currentSubject, setCurrentSubject] = useState(null);
   const [nextCode, setNextCode] = useState(null);
@@ -40,6 +43,7 @@ const Work = () => {
     if (currentCode && currentCode !== nextCode) {
       saveTimeRecord();
       setStartTime(Date.now());
+      setGrowthCheckCode(null);
     }
     if (nextCode) {
       setCurrentCode(nextCode);
@@ -81,6 +85,11 @@ const Work = () => {
     }
   };
 
+  const growthCheck = (code, subject) => {
+    setGrowthCheckCode(code);
+    setGrowthCheckSubject(subject);
+  };
+
   return (
     <div
       style={{
@@ -120,15 +129,19 @@ const Work = () => {
         </>
       )}
       {mode === "rest" && (
-        <div
-          style={{
+        growthCheckCode 
+          ? <div style={{ height: "90vh" }}>
+              <ProjectProgress code={growthCheckCode} subject={growthCheckSubject} onBack={() => setGrowthCheckCode(null)}/>
+            </div>
+          : <div
+            style={{
             display: "flex",
             flexDirection: "column",
             height: "90vh",
           }}
         >
           <div>
-            <SelectSubject currentCode={currentCode} onSelect={changeCode} />
+            <SelectSubject currentCode={currentCode} onSelect={changeCode} onGrowthCheck={growthCheck}/>
             {currentCode && (
               <Button
                 onClick={endWork}
@@ -164,7 +177,6 @@ const Work = () => {
         </div>
       )}
     </div>
-  );
-};
+)};
 
 export default Work;

@@ -10,6 +10,7 @@ import End from "./pages/End.jsx";
 import History from "./pages/History.jsx";
 import Home from "./pages/Home.jsx";
 import Work from "./pages/Work.jsx";
+import Invite from "./pages/Invite";
 import { getMyProfile } from "./lib/api.js";
 
 (async () => {
@@ -28,6 +29,10 @@ createRoot(document.getElementById("root")).render(
           <Route path="/work" element={<Work />} />
           <Route path="/end" element={<End />} />
           <Route path="/history" element={<History />} />
+          <Route
+            path="/invite"
+            element={<Invite userName="User Name" project="Example Project" />}
+          />
         </Routes>
       </BrowserRouter>
     </LocalizationProvider>

@@ -7,6 +7,7 @@ import SubjectInfo from "../components/Work/SubjectInfo";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
 import db from "../utils/indexeddb";
+import background_image from "../assets/select_proj_background.svg";
 
 const WORK_DURATION = 7;
 const REST_DURATION = 5;
@@ -33,7 +34,7 @@ const Work = () => {
     }
     setCurrentCode(nextCode);
     setCurrentSubject(nextSubject);
-    setMode("work");
+    setMode("work");  
   };
 
   const endWork = () => {
@@ -66,10 +67,13 @@ const Work = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        background:
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: 
           mode === "work"
             ? "linear-gradient(0deg, #D5E9EA 0%, #0074D9 100%)"
-            : "linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)",
+            : `url(${background_image}), linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)`, 
       }}
     >
       {mode === "work" && (

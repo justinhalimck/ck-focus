@@ -18,13 +18,16 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
         display: 'flex',
         gap: '2px',
         ':hover > *': {
-          backgroundColor: '#0088FF'
+          backgroundColor: selectProjectAnchorEl ? '#0088FF' : ''
         },
-        ':hover svg': {
-          rotate: '0deg'
+      }}
+      onClick={(e) => {
+        if (selectProjectAnchorEl) {
+          setSelectProjectAnchorEl(null)
+        } else {
+          setSelectProjectAnchorEl(e.currentTarget)
         }
       }}
-      onClick={(e) => setSelectProjectAnchorEl(e.currentTarget)}
       >
         <Button
           variant="contained"
@@ -51,7 +54,7 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
           borderBottomRightRadius: '100px'
         }}>
           <ExpandMore htmlColor="white" sx={{
-          rotate: '180deg'
+            rotate: selectProjectAnchorEl ? '0deg' : '180deg'
           }}/>
         </Box>
       </Box>
@@ -95,7 +98,7 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
             overflow: 'auto'
           }}>
             {Object.entries(PROJECTS).map(([k ,v]) => {
-              if (searchText && searchText.length > 0 && (!(k + v).toLocaleLowerCase().includes(searchText)))
+              if (searchText && searchText.length > 0 && (!(k + v).toLocaleLowerCase().includes(searchText.toLocaleLowerCase())))
                 return;
               return (
                 <Box 

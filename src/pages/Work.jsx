@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import background_image from "../assets/select_proj_background.svg";
 import CountdownTimer from "../components/CountdownTimer";
+import DrawerToggle from "../components/DrawerToggle";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
 import { postAlarm, subscribeUser } from "../lib/api";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
-import db from "../utils/indexeddb";
 import { timeAfterSeconds } from "../lib/utils";
-import DrawerToggle from "../components/DrawerToggle";
+import db from "../utils/indexeddb";
 
 const WORK_DURATION = 7;
 const REST_DURATION = 5;

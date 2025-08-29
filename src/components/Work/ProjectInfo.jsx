@@ -1,4 +1,4 @@
-const SubjectInfo = ({ code, name }) => {
+const ProjectInfo = ({ code, name }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <h1 style={{ marginTop: "20vh", color: "white" }}>You are working on</h1>
@@ -28,4 +28,4 @@ const SubjectInfo = ({ code, name }) => {
   );
 };
 
-export default SubjectInfo;
+export default ProjectInfo;

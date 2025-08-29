@@ -5,8 +5,8 @@ import background_image from "../assets/select_proj_background.svg";
 import CountdownTimer from "../components/CountdownTimer";
 import DrawerToggle from "../components/DrawerToggle";
 import ProjectProgress from "../components/Work/ProjectProgress";
-import SelectSubject from "../components/Work/SelectSubject";
-import SubjectInfo from "../components/Work/SubjectInfo";
+import SelectProject from "../components/Work/SelectProject";
+import ProjectInfo from "../components/Work/ProjectInfo";
 import { deleteAlarm, postAlarm, subscribeUser } from "../lib/api";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
@@ -22,11 +22,11 @@ const Work = () => {
 
   const [mode, setMode] = useState("rest");
   const [growthCheckCode, setGrowthCheckCode] = useState(null);
-  const [growthCheckSubject, setGrowthCheckSubject] = useState(null);
+  const [growthCheckProject, setGrowthCheckProject] = useState(null);
   const [currentCode, setCurrentCode] = useState(null);
-  const [currentSubject, setCurrentSubject] = useState(null);
+  const [currentProject, setCurrentProject] = useState(null);
   const [nextCode, setNextCode] = useState(null);
-  const [nextSubject, setNextSubject] = useState(null);
+  const [nextProject, setNextProject] = useState(null);
   const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
@@ -47,11 +47,11 @@ const Work = () => {
     }
     if (nextCode) {
       setCurrentCode(nextCode);
-      setCurrentSubject(nextSubject);
+      setCurrentProject(nextProject);
       setMode("work");
       setGrowthCheckCode(null);
       postAlarm(
-        nextSubject ?? " ",
+        nextProject ?? " ",
         nextCode ?? " ",
         timeAfterSeconds(WORK_DURATION - NOTIFICATION_DELAY),
       );
@@ -78,18 +78,18 @@ const Work = () => {
     });
   };
 
-  const changeCode = (code, subject) => {
+  const changeCode = (code, project) => {
     setNextCode(code);
-    setNextSubject(subject);
+    setNextProject(project);
     if (!currentCode) {
       setStartTime(Date.now());
       startWork();
     }
   };
 
-  const growthCheck = (code, subject) => {
+  const growthCheck = (code, project) => {
     setGrowthCheckCode(code);
-    setGrowthCheckSubject(subject);
+    setGrowthCheckProject(project);
   };
 
   return (
@@ -112,7 +112,7 @@ const Work = () => {
         <>
           <DrawerToggle color="black" />
           <div style={{ height: "90vh" }}>
-            <SubjectInfo code={currentCode} name={currentSubject} />
+            <ProjectInfo code={currentCode} name={currentProject} />
           </div>
           <div
             style={{
@@ -148,7 +148,7 @@ const Work = () => {
               <div style={{ height: "90vh" }}>
                 <ProjectProgress
                   code={growthCheckCode}
-                  subject={growthCheckSubject}
+                  project={growthCheckProject}
                   onBack={() => setGrowthCheckCode(null)}
                 />
               </div>
@@ -164,7 +164,7 @@ const Work = () => {
                 }}
               >
                 <div>
-                  <SelectSubject
+                  <SelectProject
                     currentCode={currentCode}
                     onSelect={changeCode}
                     onGrowthCheck={growthCheck}
@@ -194,7 +194,7 @@ const Work = () => {
               <CountdownTimer
                 variant="green"
                 duration={REST_DURATION}
-                onComplete={() => startWork(nextCode, nextSubject)}
+                onComplete={() => startWork(nextCode, nextProject)}
               />
             ) : (
               <CountdownTimer

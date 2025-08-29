@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import BackIcon from "../assets/circle-chevron-left.svg";
 import { Messages } from "../lib/messages";
 import db from "../utils/indexeddb";
-import { SUBJECTS } from "../utils/subjects";
+import { PROJECTS } from "../utils/projects";
 import { formatTimeRecord } from "../utils/time";
 
 const History = () => {
@@ -75,7 +75,7 @@ const History = () => {
                     return (
                       <ListItemText
                         key={crypto.randomUUID()}
-                        primary={SUBJECTS[code]}
+                        primary={PROJECTS[code]}
                         secondary={`${code} ${formatTimeRecord(duration)}`}
                       />
                     );

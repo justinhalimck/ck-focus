@@ -80,7 +80,7 @@ export async function getUsers() {
 
 export async function postInvite(id, to) {
   axios.post(
-    "http://localhost:5175/api/invite",
+    "https://pomodoro-api.incin.net/api/invite",
     {
       id,
       to,

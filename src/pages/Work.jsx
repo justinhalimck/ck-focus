@@ -13,8 +13,8 @@ import { SWClient } from "../lib/sw";
 import { timeAfterSeconds } from "../lib/utils";
 import db from "../utils/indexeddb";
 
-const WORK_DURATION = 30;
-const REST_DURATION = 15;
+const WORK_DURATION = 10;
+const REST_DURATION = 10;
 const NOTIFICATION_DELAY = 3;
 
 const Work = () => {
@@ -139,13 +139,19 @@ const Work = () => {
       {mode === "rest" && (
         <>
           {growthCheckCode ? (
-            <div style={{ height: "90vh" }}>
-              <ProjectProgress
-                code={growthCheckCode}
-                project={growthCheckProject}
+            <>
+              <DrawerToggle
+                color="black"
                 onBack={() => setGrowthCheckCode(null)}
               />
-            </div>
+              <div style={{ height: "90vh" }}>
+                <ProjectProgress
+                  code={growthCheckCode}
+                  project={growthCheckProject}
+                  onBack={() => setGrowthCheckCode(null)}
+                />
+              </div>
+            </>
           ) : (
             <div
               style={{

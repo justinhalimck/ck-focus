@@ -25,6 +25,7 @@ const SelectSubject = ({ currentCode, onSelect }) => {
           textAlign: "left",
           width: "80vw",
         }}
+        value={currentCode}
         renderInput={(params) => (
           <TextField {...params} label="Select subject" />
         )}
@@ -32,8 +33,8 @@ const SelectSubject = ({ currentCode, onSelect }) => {
       />
 
       {!currentCode && (
-        <h1 style={{ margin: "1em", marginTop: "20vh" }}>
-          "Please select your subject."
+        <h1 style={{ margin: "1em", marginTop: "25vh" }}>
+          Please select your subject.
         </h1>
       )}
       {currentCode && (

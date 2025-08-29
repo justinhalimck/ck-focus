@@ -12,7 +12,7 @@ import db from "../utils/indexeddb";
 import { timeAfterSeconds } from "../lib/utils";
 
 const WORK_DURATION = 7;
-const REST_DURATION = 5;
+const REST_DURATION = 500;
 const NOTIFICATION_DELAY = 3;
 
 const Work = () => {
@@ -87,7 +87,9 @@ const Work = () => {
         backgroundImage:
           mode === "work"
             ? "linear-gradient(0deg, #D5E9EA 0%, #0074D9 100%)"
-            : `url(${background_image}), linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)`,
+            : currentCode 
+              ? "linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)"
+              : `url(${background_image}), linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)`,
       }}
     >
       {mode === "work" && (

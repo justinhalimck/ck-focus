@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, Menu, TextField, Typography } from "@mui/material";
+import { Box, Button, Menu, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { PROJECTS } from "../../utils/projects";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -12,33 +12,6 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      {currentCode && (
-        <div>
-          {Object.entries(PROJECTS)
-            .slice(0, 5)
-            .map((project, i) => (
-              <div
-                style={{
-                  display: "flex",
-                  width: "80vw",
-                  height: "47px",
-                  minWidth: "40px",
-                  padding: "4px 12px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexShrink: 0,
-                  borderRadius: "10px",
-                  background: "white",
-                  margin: "10px",
-                }}
-                key={i}
-                onClick={() => onGrowthCheck(project[0], project[1])}
-              >
-                Check {project[1]} growth
-              </div>
-            ))}
-        </div>
-      )}
       <Box sx={{
         width: '80vw',
         height: '32px',

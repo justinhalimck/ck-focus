@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { CssBaseline } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { Dashboard } from "./components/dashboard/Dashboard.jsx";
+import { Dashboard } from "./pages/Dashboard.jsx";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import Home from "./pages/Home.jsx";

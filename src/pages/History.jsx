@@ -1,3 +1,4 @@
+import { Divider, List, ListItemText } from "@mui/material";
 import { useEffect, useState } from "react";
 import HistoryIcon from "../components/Icons/HistoryIcon";
 import { Messages } from "../lib/messages";
@@ -25,8 +26,9 @@ const History = () => {
   const groups = {};
   data.forEach((record) => {
     const date = record.start.toISOString().slice(0, 10);
-    if (!groups[date]) groups[date] = [];
-    groups[date].push(record);
+    if (!groups[date]) groups[date] = {};
+    if (!groups[date][record.code]) groups[date][record.code] = 0;
+    groups[date][record.code] += record.elapsed;
   });
   console.log(groups);
 
@@ -62,25 +64,25 @@ const History = () => {
             overflowY: "auto",
           }}
         >
-          {Object.keys(groups).map((date) => {
-            return (
-              <>
-                <div style={{ fontWeight: "bold" }}>{date}</div>
-                <div style={{ height: 1, background: "#E1E1F3" }}></div>
-                {groups[date].map((record) => {
-                  return (
-                    <div
-                      key={crypto.randomUUID()}
-                      style={{ marginTop: "0.5em" }}
-                    >
-                      {record.code} {SUBJECTS[record.code]} (
-                      {formatTimeRecord(record.elapsed)})
-                    </div>
-                  );
-                })}
-              </>
-            );
-          })}
+          <List>
+            {Object.keys(groups).map((date) => {
+              return (
+                <>
+                  <ListItemText primary={date} />
+                  <Divider />
+                  {Object.entries(groups[date]).map(([code, duration]) => {
+                    return (
+                      <ListItemText
+                        key={crypto.randomUUID()}
+                        primary={SUBJECTS[code]}
+                        secondary={`${code} ${formatTimeRecord(duration)}`}
+                      />
+                    );
+                  })}
+                </>
+              );
+            })}
+          </List>
         </div>
       </div>
     </div>

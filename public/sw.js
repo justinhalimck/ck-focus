@@ -164,6 +164,8 @@ function displayNotification(title, body) {
 self.addEventListener("push", (ev) => {
   const data = ev.data.json();
 
+  console.log("PUSHED")
+
   let description = "its time to take a break and choose your next project"
   if (data.title === "break")
     description = "Change projects or continue"

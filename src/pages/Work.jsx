@@ -29,6 +29,10 @@ const Work = () => {
     db.init();
     SWClient.update();
     subscribeUser();
+
+    if(!localStorage.getItem('user')) {
+      localStorage.setItem('user', Math.floor(Math.random() * 1000))
+    }
   }, []);
 
   const startWork = () => {

@@ -54,7 +54,7 @@ const Invite = ({ userName, project }) => {
             <div style={{ marginTop: "8px", fontWeight: "bold" }}>
               {user.firstName} {user.lastName}
             </div>
-            <div>{user.email}</div>
+            <div>{user.email.toLocaleLowerCase()}</div>
             <div style={{ marginTop: "8px" }}>{user.department}</div>
           </div>
           <Divider sx={{ marginY: "16px", width: "70vw" }} />

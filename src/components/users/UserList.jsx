@@ -10,7 +10,6 @@ export default function UserList({ onSelect, projectCode, showSelf = false }) {
   useEffect(() => {
     (async () => {
       const users = (await getUsers()).users;
-      console.log(users);
       setUsers(users);
     })();
   }, []);

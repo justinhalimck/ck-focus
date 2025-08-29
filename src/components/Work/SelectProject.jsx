@@ -34,7 +34,7 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
         <div>
           {Object.entries(PROJECTS)
             .slice(0, 5)
-            .map((project) => (
+            .map((project, i) => (
               <div
                 style={{
                   display: "flex",
@@ -49,6 +49,7 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
                   background: "white",
                   margin: "10px",
                 }}
+                key={i}
                 onClick={() => onGrowthCheck(project[0], project[1])}
               >
                 Check {project[1]} growth

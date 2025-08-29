@@ -73,6 +73,7 @@ export async function getMyProfile() {
   }
   
 export async function getUsers() {
-  return axios.get("https://pomodoro-api.incin.net/api/users", 
+  let res = await axios.get("https://pomodoro-api.incin.net/api/users", 
     {headers: { "x-focus-user": localStorage.getItem('user') }})
+  return res.data;
 }

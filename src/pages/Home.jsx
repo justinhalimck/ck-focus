@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import DrawerToggle from "../components/DrawerToggle";
 import Logo from "../components/Icons/Logo";
+import UserList from "../components/users/UserList";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ const Home = () => {
         >
           Start working
         </Button>
+        <UserList/>
       </div>
     </div>
   );

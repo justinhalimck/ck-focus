@@ -47,6 +47,11 @@ const DrawerToggle = ({ color, onBack }) => {
                 <ListItemText primary="History" />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate("/invite")}>
+                <ListItemText primary="Invite" />
+              </ListItemButton>
+            </ListItem>
           </List>
         </div>
       </Drawer>

@@ -1,12 +1,14 @@
-import { Divider, List, ListItemText } from "@mui/material";
+import { Divider, IconButton, List, ListItemText } from "@mui/material";
 import { useEffect, useState } from "react";
-import HistoryIcon from "../components/Icons/HistoryIcon";
+import { useNavigate } from "react-router";
+import BackIcon from "../assets/circle-chevron-left.svg";
 import { Messages } from "../lib/messages";
 import db from "../utils/indexeddb";
 import { SUBJECTS } from "../utils/subjects";
 import { formatTimeRecord } from "../utils/time";
 
 const History = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -30,7 +32,6 @@ const History = () => {
     if (!groups[date][record.code]) groups[date][record.code] = 0;
     groups[date][record.code] += record.elapsed;
   });
-  console.log(groups);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -48,10 +49,10 @@ const History = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ margin: "1em" }}>
-            <HistoryIcon />
-          </div>
-          <h1 style={{ margin: 0 }}>History</h1>
+          <IconButton onClick={() => navigate(-1)}>
+            <img src={BackIcon} alt="back" />
+          </IconButton>
+          <h1 style={{ margin: 0, marginLeft: "0.5em" }}>History</h1>
         </div>
         <div
           style={{

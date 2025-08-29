@@ -42,7 +42,7 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
             fontSize: '14px',
           }}
         >
-          <Typography textTransform={'none'}>Select subject</Typography>
+          <Typography textTransform={'none'}>Select project</Typography>
         </Button>
         <Box sx={{
           display: 'flex',
@@ -124,6 +124,16 @@ const SelectProject = ({ currentCode, onSelect, onGrowthCheck }) => {
             })}
           </Box>
       </Menu>
+        {currentCode && (
+          <Box sx={{
+            pt: 2,
+            pb: 1,
+            display: 'flex',
+            width: '80vw'
+          }}>
+            <Typography textAlign={'left'} fontWeight={'bold'}>Latest projects</Typography>
+          </Box>
+        )}
         {!currentCode && (
           <h1 style={{ margin: "1em", marginTop: "25vh" }}>
             Please select your project.

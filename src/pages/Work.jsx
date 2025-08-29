@@ -199,7 +199,7 @@ const Work = () => {
               <CountdownTimer
                 variant="green"
                 duration={0}
-                onComplete={() => { }}
+                onComplete={() => {}}
               />
             )}
           </div>

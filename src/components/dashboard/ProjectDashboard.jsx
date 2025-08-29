@@ -73,7 +73,9 @@ export const ProjectDashboard = (props) => {
         gap: 2,
       }}
     >
-      <Typography variant="h4" padding='24px'>Hours</Typography>
+      <Typography variant="h4" padding="24px">
+        Hours
+      </Typography>
 
       <Box
         sx={{
@@ -254,16 +256,16 @@ export const ProjectDashboard = (props) => {
                     }}
                   />
                 </Box>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      fontWeight: 600,
-                      textWrap: "nowrap",
-                      minWidth: "auto",
-                    }}
-                  >
-                    {hours}hrs
-                  </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    fontWeight: 600,
+                    textWrap: "nowrap",
+                    minWidth: "auto",
+                  }}
+                >
+                  {hours}hrs
+                </Typography>
               </Box>
             );
           })}

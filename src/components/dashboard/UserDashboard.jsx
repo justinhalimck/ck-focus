@@ -32,7 +32,7 @@ export const UserDashboard = (props) => {
     timeSlots.push(`${hour.toString().padStart(2, "0")}:00`);
     timeSlots.push(`${hour.toString().padStart(2, "0")}:30`);
   }
-//   timeSlots.push("18:00");
+  //   timeSlots.push("18:00");
 
   const getProjectColor = (projectId) => {
     const project = projects.find((p) => p.id === projectId);
@@ -70,7 +70,7 @@ export const UserDashboard = (props) => {
           <Box
             key={timeSlot}
             sx={{
-              width: 'calc((100% - 100px) / 18)',
+              width: "calc((100% - 100px) / 18)",
               padding: 1,
               textAlign: "center",
               borderRight: `1px solid ${theme.palette.divider}`,
@@ -100,14 +100,14 @@ export const UserDashboard = (props) => {
             "&:hover": {
               backgroundColor: theme.palette.action.hover,
             },
-            width: '100%',
+            width: "100%",
             // minWidth: `${133 + timeSlots.length * 67}px`, // Match header width
           }}
         >
           {/* User Name Column */}
           <Box
             sx={{
-              width: '100px',
+              width: "100px",
               padding: 2,
               borderRight: `1px solid ${theme.palette.divider}`,
               display: "flex",
@@ -173,7 +173,7 @@ export const UserDashboard = (props) => {
               // Calculate proper width to match header slots exactly
               // Each header slot is: 100px width + 16px padding + 1px border = 117px total
               // For grouped slots: we want the same total width as the individual header slots they replace
-              const groupWidth = `calc(${group.slotCount} * ((100% - 100px) / 18))`; 
+              const groupWidth = `calc(${group.slotCount} * ((100% - 100px) / 18))`;
 
               return (
                 <Box

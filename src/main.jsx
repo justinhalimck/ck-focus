@@ -14,8 +14,8 @@ import { getMyProfile } from "./lib/api.js";
 
 (async () => {
   let profile = await getMyProfile();
-  localStorage.setItem('profile', profile);
-})()
+  localStorage.setItem("profile", profile);
+})();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

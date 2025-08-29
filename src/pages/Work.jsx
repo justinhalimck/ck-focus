@@ -13,8 +13,8 @@ import { SWClient } from "../lib/sw";
 import { timeAfterSeconds } from "../lib/utils";
 import db from "../utils/indexeddb";
 
-const WORK_DURATION = 60;
-const REST_DURATION = 30;
+const WORK_DURATION = 30;
+const REST_DURATION = 15;
 const NOTIFICATION_DELAY = 3;
 
 const Work = () => {

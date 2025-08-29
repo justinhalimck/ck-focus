@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import DrawerToggle from "../components/DrawerToggle";
 import Logo from "../components/Icons/Logo";
-import UserList from "../components/users/UserList";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column", textAlign: "center" }}>
       <div
         style={{
           height: "100vh",
@@ -67,7 +66,6 @@ const Home = () => {
         >
           Start working
         </Button>
-        <UserList/>
       </div>
     </div>
   );

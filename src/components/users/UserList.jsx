@@ -19,9 +19,7 @@ export default function UserList({onSelect}) {
         return <div>Loading users...</div>
 
   return (
-    <Box>
-        <Typography textAlign={'left'}>Users</Typography>
-        <Divider />
+    <Box sx={{width: "80vw"}}>
         {users.map((u) => {
             if (u.id === String(me)) return;
             return <UserListItem key={u.uuid} user={u} onClick={onSelect}/>

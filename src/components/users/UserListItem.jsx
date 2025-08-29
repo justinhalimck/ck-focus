@@ -26,8 +26,8 @@ export default function UserListItem({user, onClick}) {
                 gap: 1,
                 height: '16px'
             }}>
-                <Typography fontSize={'16px'} fontWeight={'bold'}>{user.firstName}</Typography>
-                <Typography fontSize={'16px'} fontWeight={'bold'}>{user.lastName}</Typography>
+                <Typography fontSize={'16px'} >{user.firstName}</Typography>
+                <Typography fontSize={'16px'} >{user.lastName}</Typography>
             </Box>
             <Box sx={{
                 textAlign: 'left',

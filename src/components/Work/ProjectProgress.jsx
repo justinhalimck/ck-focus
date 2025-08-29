@@ -1,7 +1,11 @@
+import { Autocomplete, TextField } from "@mui/material";
+import Divider from '@mui/material/Divider';
+import Contributor from "./Contributor";
 import tree_stage_1 from "../../assets/tree_stage_1.svg";
 import tree_stage_2 from "../../assets/tree_stage_2.svg";
 import tree_stage_3 from "../../assets/tree_stage_3.svg";
 import tree_stage_4 from "../../assets/tree_stage_4.svg";
+import UserList from "../../components/users/UserList";
 
 const ProjectProgress = ({ code, project }) => {
   return (
@@ -10,6 +14,8 @@ const ProjectProgress = ({ code, project }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        maxHeight: "80vh",
+        overflowY: "auto",
       }}
     >
       <div
@@ -104,10 +110,54 @@ const ProjectProgress = ({ code, project }) => {
           color: "#28272C",
           fontSize: "14px",
           fontWeight: 600,
+          textAlign: "left",
+          width: "80vw",
+          margin: "2vw",
         }}
       >
         Current Level
       </div>
+        <div style={{
+                color: "#28272C",
+                fontSize: "14px",
+                fontWeight: 400,
+                display: "flex",
+                justifyContent: "space-between",
+                width: "80vw",
+        }}>
+            <div>
+                {code === "933251" && ("Level 1: Seedling")}
+                {code === "933264" && ("Level 2: Sprout")}
+                {code === "933255" && ("Level 3: Sapling")}
+                {code === "902294" && ("Level 4: Young Tree")}
+                {code === "953277" && ("Level 3: Sapling")}
+                {code === "943215" && ("Level 2: Sprout")}
+                {code === "923303" && ("Level 3: Sapling")}
+                {code === "943226" && ("Level 3: Sapling")}
+            </div>
+            <div>
+                {code === "933251" && ("10 hours")}
+                {code === "933264" && ("50 hours")}
+                {code === "933255" && ("100 hours")}
+                {code === "902294" && ("300 hours")}
+                {code === "953277" && ("100 hours")}
+                {code === "943215" && ("50 hours")}
+                {code === "923303" && ("100 hours")}
+                {code === "943226" && ("100 hours")}
+            </div>
+        </div>
+        <Divider sx={{width: "80vw", bgcolor: "#28272C", marginTop: "2vh"}}/>
+        <div style={{
+            color: "#28272C",
+            fontSize: "14px",
+            fontWeight: 600,
+            marginTop: "4vw",
+            width: "80vw",
+            textAlign: "left"
+        }}>
+            Top Contributors
+        </div>
+        <UserList/>
     </div>
   );
 };

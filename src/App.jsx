@@ -25,16 +25,8 @@ function App() {
 
   useEffect(() => {
     if (count === 0) {
-      subscribeUser();
-      SWClient.update();
       return;
     }
-
-    postAlarm(
-      `my alarm ${count}`,
-      `alarm body ${count}`,
-      new Date().getTime() + 5000,
-    );
 
     // Store focus session data in IndexedDB
     const storeFocusSession = async () => {

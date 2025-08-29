@@ -9,6 +9,7 @@ import { postAlarm, subscribeUser } from "../lib/api";
 import { Messages } from "../lib/messages";
 import { SWClient } from "../lib/sw";
 import db from "../utils/indexeddb";
+import { timeAfterSeconds } from "../lib/utils";
 
 const WORK_DURATION = 7;
 const REST_DURATION = 5;
@@ -42,7 +43,7 @@ const Work = () => {
       postAlarm(
         nextSubject ?? " ",
         nextCode ?? " ",
-        Date.now() + (WORK_DURATION - NOTIFICATION_DELAY) * 1000,
+        timeAfterSeconds(WORK_DURATION - NOTIFICATION_DELAY),
       );
     }
   };
@@ -96,7 +97,7 @@ const Work = () => {
           </div>
           <CountdownTimer
             duration={WORK_DURATION}
-            onComplete={() => setMode("rest")}
+            onComplete={() => {setMode("rest"); postAlarm("break", " ", timeAfterSeconds(REST_DURATION - NOTIFICATION_DELAY))}}
           />
         </>
       )}

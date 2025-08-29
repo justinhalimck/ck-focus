@@ -163,7 +163,12 @@ function displayNotification(title, body) {
 
 self.addEventListener("push", (ev) => {
   const data = ev.data.json();
-  displayNotification(data.title + " is ending!", "its time to take a break and choose your next project");
+
+  let description = "its time to take a break and choose your next project"
+  if (data.title === "break")
+    description = "Change projects or continue"
+
+  displayNotification(data.title + " is ending!", description);
 });
 
 self.addEventListener("message", (ev) => {

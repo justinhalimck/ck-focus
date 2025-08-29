@@ -110,7 +110,7 @@ const Work = () => {
     >
       {mode === "work" && (
         <>
-          <DrawerToggle color="black" />
+          <DrawerToggle color="white" />
           <div style={{ height: "90vh" }}>
             <ProjectInfo code={currentCode} name={currentProject} />
           </div>

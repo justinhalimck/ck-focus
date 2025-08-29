@@ -137,14 +137,14 @@ const ProjectProgress = ({ code, project }) => {
           {code === "943226" && "Level 3: Sapling"}
         </div>
         <div>
-          {code === "933251" && "10 hours"}
-          {code === "933264" && "50 hours"}
-          {code === "933255" && "100 hours"}
-          {code === "902294" && "300 hours"}
-          {code === "953277" && "100 hours"}
-          {code === "943215" && "50 hours"}
-          {code === "923303" && "100 hours"}
-          {code === "943226" && "100 hours"}
+          {code === "933251" && "9 hours"}
+          {code === "933264" && "51 hours"}
+          {code === "933255" && "122 hours"}
+          {code === "902294" && "312 hours"}
+          {code === "953277" && "101 hours"}
+          {code === "943215" && "70 hours"}
+          {code === "923303" && "210 hours"}
+          {code === "943226" && "114 hours"}
         </div>
       </div>
       <Divider sx={{ width: "80vw", bgcolor: "#28272C", marginTop: "2vh" }} />

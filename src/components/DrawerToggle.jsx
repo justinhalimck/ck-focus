@@ -38,6 +38,11 @@ const DrawerToggle = ({ color, onBack }) => {
         <div style={{ width: "12em" }}>
           <List>
             <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate("/")}>
+                <ListItemText primary="Home" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
               <ListItemButton onClick={() => navigate("/history")}>
                 <ListItemText primary="History" />
               </ListItemButton>

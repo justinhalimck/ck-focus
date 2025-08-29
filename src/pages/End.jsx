@@ -10,7 +10,7 @@ const End = () => {
       <div
         style={{
           height: "100vh",
-          background: "linear-gradient(0deg, #DDEFFF 0%, #F8F8F8 100%)",
+          background: "linear-gradient(180deg, #DDEFFF 0%, #F8F8F8 100%)",
         }}
       >
         <div

@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import background_image from "../assets/select_proj_background.svg";
 import CountdownTimer from "../components/CountdownTimer";
 import SelectSubject from "../components/Work/SelectSubject";
 import SubjectInfo from "../components/Work/SubjectInfo";
@@ -39,7 +40,11 @@ const Work = () => {
       setCurrentCode(nextCode);
       setCurrentSubject(nextSubject);
       setMode("work");
-      postAlarm(nextSubject ?? " ", nextCode ?? " ", Date.now() + (WORK_DURATION - NOTIFICATION_DELAY) * 1000);
+      postAlarm(
+        nextSubject ?? " ",
+        nextCode ?? " ",
+        Date.now() + (WORK_DURATION - NOTIFICATION_DELAY) * 1000,
+      );
     }
   };
 

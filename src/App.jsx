@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import db from "./utils/indexeddb";
-import { SWClient } from "./lib/sw";
 import { postAlarm, subscribeUser } from "./lib/api";
+import { SWClient } from "./lib/sw";
+import db from "./utils/indexeddb";
 
 function App() {
   const [count, setCount] = useState(0);

@@ -14,7 +14,7 @@ import { timeAfterSeconds } from "../lib/utils";
 import db from "../utils/indexeddb";
 
 const WORK_DURATION = 7;
-const REST_DURATION = 5;
+const REST_DURATION = 500;
 const NOTIFICATION_DELAY = 3;
 
 const Work = () => {
@@ -106,9 +106,9 @@ const Work = () => {
               : `url(${background_image}), linear-gradient(180deg, #DDEFFF 2.4%, #F8F8F8 100%)`,
       }}
     >
-      <DrawerToggle color="black" />
       {mode === "work" && (
         <>
+          <DrawerToggle color="black" />
           <div style={{ height: "90vh" }}>
             <SubjectInfo code={currentCode} name={currentSubject} />
           </div>
@@ -129,36 +129,44 @@ const Work = () => {
         </>
       )}
       {mode === "rest" && (
-        growthCheckCode 
-          ? <div style={{ height: "90vh" }}>
-              <ProjectProgress code={growthCheckCode} subject={growthCheckSubject} onBack={() => setGrowthCheckCode(null)}/>
-            </div>
-          : <div
+        <>
+        {growthCheckCode 
+          ? <>
+              <DrawerToggle color="black" onBack={() => setGrowthCheckCode(null)}/>
+              <div style={{ height: "90vh" }}>
+                <ProjectProgress code={growthCheckCode} subject={growthCheckSubject} onBack={() => setGrowthCheckCode(null)}/>
+              </div>
+            </>
+          : <>
+            <DrawerToggle color="black" />
+            <div
             style={{
             display: "flex",
             flexDirection: "column",
             height: "90vh",
-          }}
-        >
-          <div>
-            <SelectSubject currentCode={currentCode} onSelect={changeCode} onGrowthCheck={growthCheck}/>
-            {currentCode && (
-              <Button
-                onClick={endWork}
-                sx={{
-                  marginTop: "10vh",
-                  borderRadius: "40px",
-                  background: "#28272C",
-                  textTransform: "none",
-                  fontSize: "14px",
-                  paddingX: "10vw",
-                  color: "white",
-                }}
-              >
-                Stop working
-              </Button>
-            )}
-          </div>
+            }}
+            >
+              <div>
+                <SelectSubject currentCode={currentCode} onSelect={changeCode} onGrowthCheck={growthCheck}/>
+                {currentCode && (
+                  <Button
+                    onClick={endWork}
+                    sx={{
+                      marginTop: "10vh",
+                      borderRadius: "40px",
+                      background: "#28272C",
+                      textTransform: "none",
+                      fontSize: "14px",
+                      paddingX: "10vw",
+                      color: "white",
+                    }}
+                  >
+                    Stop working
+                  </Button>
+                )}
+              </div>
+            </div>
+          </>}
           <div style={{ position: "absolute", bottom: 0, width: "100vw" }}>
             {nextCode ? (
               <CountdownTimer
@@ -174,7 +182,7 @@ const Work = () => {
               />
             )}
           </div>
-        </div>
+          </>
       )}
     </div>
 )};

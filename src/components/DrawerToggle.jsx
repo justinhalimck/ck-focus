@@ -9,14 +9,20 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import HamburgerIcon from "./Icons/HamburgerIcon";
+import BackIcon from "../assets/circle-chevron-left.svg";
 
-const DrawerToggle = ({ color }) => {
+const DrawerToggle = ({ color, onBack }) => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <>
-      <div style={{ display: "flex", padding: "1em" }}>
+      <div style={{ display: "flex", height:"10vh", padding: "0 8vw 0 8vw" }}>
+        {onBack && (
+          <IconButton onClick={onBack} >
+            <img src={BackIcon} alt="back"/>
+          </IconButton>
+        )}
         <IconButton
           onClick={() => setDrawerOpen(true)}
           sx={{ marginLeft: "auto", color }}

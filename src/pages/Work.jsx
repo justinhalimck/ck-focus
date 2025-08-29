@@ -104,10 +104,10 @@ const Work = () => {
         <>
           <div style={{ height: "90vh" }}>
             <SelectSubject currentCode={currentCode} onSelect={changeCode} />
-            <Button
+            {currentCode && <Button
               onClick={endWork}
               sx={{
-                marginTop: "15vh",
+                marginTop: "10vh",
                 borderRadius: "40px",
                 background: "#28272C",
                 textTransform: "none",
@@ -117,7 +117,7 @@ const Work = () => {
               }}
             >
               Stop working
-            </Button>
+            </Button>}
           </div>
           {nextCode ? (
             <CountdownTimer

@@ -15,8 +15,10 @@ const Work = () => {
   const navigate = useNavigate();
 
   const [mode, setMode] = useState("rest");
-  const [code, setCode] = useState(null);
-  const [subjectName, setSubjectName] = useState(null);
+  const [currentCode, setCurrentCode] = useState(null);
+  const [currentSubject, setCurrentSubject] = useState(null);
+  const [nextCode, setNextCode] = useState(null);
+  const [nextSubject, setNextSubject] = useState(null);
   const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
@@ -24,17 +26,39 @@ const Work = () => {
     SWClient.update();
   });
 
-  const saveTimeRecord = () => {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    SWClient.post(Messages.SaveTimeRecord, { code, elapsed });
+  const startWork = () => {
+    if (currentCode && currentCode !== nextCode) {
+      saveTimeRecord();
+      setStartTime(Date.now());
+    }
+    setCurrentCode(nextCode);
+    setCurrentSubject(nextSubject);
+    setMode("work");
   };
 
-  const onSelect = (newCode, newSubject) => {
-    if (code && code !== newCode) saveTimeRecord();
+  const endWork = () => {
+    if (currentCode) {
+      saveTimeRecord();
+      setCurrentCode(null);
+      setCurrentSubject(null);
+      setNextCode(null);
+      setNextSubject(null);
+    }
+    navigate("/end");
+  };
 
-    setCode(newCode);
-    setSubjectName(newSubject);
-    setStartTime(Math.floor(Date.now()));
+  const saveTimeRecord = () => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    SWClient.post(Messages.SaveTimeRecord, { code: currentCode, elapsed });
+  };
+
+  const changeCode = (newCode, newSubject) => {
+    setNextCode(newCode);
+    setNextSubject(newSubject);
+    if (!currentCode) {
+      setStartTime(Date.now());
+      startWork();
+    }
   };
 
   return (
@@ -51,7 +75,7 @@ const Work = () => {
       {mode === "work" && (
         <>
           <div style={{ height: "90vh" }}>
-            <SubjectInfo code={code} name={subjectName} />
+            <SubjectInfo code={currentCode} name={currentSubject} />
           </div>
           <CountdownTimer
             duration={WORK_DURATION}
@@ -62,12 +86,9 @@ const Work = () => {
       {mode === "rest" && (
         <>
           <div style={{ height: "90vh" }}>
-            <SelectSubject currentCode={code} onSelect={onSelect} />
+            <SelectSubject currentCode={currentCode} onSelect={changeCode} />
             <Button
-              onClick={() => {
-                if (code) saveTimeRecord();
-                navigate("/end");
-              }}
+              onClick={endWork}
               sx={{
                 marginTop: "15vh",
                 borderRadius: "40px",
@@ -81,13 +102,10 @@ const Work = () => {
               Stop working
             </Button>
           </div>
-          {code ? (
-            <CountdownTimer
-              duration={REST_DURATION}
-              onComplete={() => setMode("work")}
-            />
+          {currentCode ? (
+            <CountdownTimer duration={REST_DURATION} onComplete={startWork} />
           ) : (
-            <CountdownTimer duration={0} onComplete={() => {}} />
+            <CountdownTimer duration={0} onComplete={() => { }} />
           )}
         </>
       )}

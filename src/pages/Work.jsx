@@ -139,13 +139,19 @@ const Work = () => {
       {mode === "rest" && (
         <>
           {growthCheckCode ? (
-            <div style={{ height: "90vh" }}>
-              <ProjectProgress
-                code={growthCheckCode}
-                project={growthCheckProject}
+            <>
+              <DrawerToggle
+                color="black"
                 onBack={() => setGrowthCheckCode(null)}
               />
-            </div>
+              <div style={{ height: "90vh" }}>
+                <ProjectProgress
+                  code={growthCheckCode}
+                  project={growthCheckProject}
+                  onBack={() => setGrowthCheckCode(null)}
+                />
+              </div>
+            </>
           ) : (
             <div
               style={{
